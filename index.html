@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Proposal Generator </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <h1 class="text-center"> PROPOSAL GENERATOR </h1>
+        <div style="width: 85%; margin: 0 auto; background-color: azure; padding: 2rem;">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <strong> <label for="businessName"> Business Name <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="businessName" type="text" title="Type your Business Name here"
+                            placeholder="eg. John Smith" name="businessName" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <strong> <label for="currentProvider"> Current Provider <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="currentProvider" type="text" title="Current Provider"
+                            placeholder="eg. Clover" name="currentProvider" required>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <strong> <label for="volume"> Volume <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="volume" type="number" title="Total Volume"
+                            placeholder="Amount (USD)" name="volume" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <strong> <label for="ticket"> Average Ticket <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="ticket" type="number" title="Total avg. ticket"
+                            placeholder="Amount (USD)" name="ticket" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <strong> <label for="transactions"> Total Transactions <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="transactions" type="number" title="Total Transactions"
+                            placeholder="eg. 75" name="volume" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-center"> Processing Fees </h2>
+            <div class="form-group">
+
+                <div class="row" style="text-align: center;">
+                    <div class="col-sm-2">
+                        <strong> Visa </strong>
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Volume" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="#" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="%" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Item" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Fee" />
+                    </div>
+                </div>
+
+                <div class="row" style="text-align: center; ">
+                    <div class="col-sm-2">
+                        <strong> Mastercard </strong>
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Volume" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="#" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="%" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Item" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Fee" />
+                    </div>
+                </div>
+
+                <div class="row" style="text-align: center; ">
+                    <div class="col-sm-2">
+                        <strong> Discover </strong>
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Volume" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="#" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="%" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Item" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Fee" />
+                    </div>
+                </div>
+
+                <div class="row" style="text-align: center; ">
+                    <div class="col-sm-2">
+                        <strong> AMEX </strong>
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Volume" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="#" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="%" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Item" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control" type="number" style="width: 100%;" placeholder="Fee" />
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <h2 class="text-center"> Association & Auth </h2>
+
+            <div class="form-group" id="monthlyV">
+                <div class="row">
+                    <div class="col-sm-6 bottom">
+                        <label for="fee"> Association fees <span style="color: red">*</span> </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input type="text" class="form-control" min="0" id="fee" name="totalVolume"
+                            placeholder="Amount (USD)" required>
+                        </div>
+                        <br>
+                        <div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" id="other" name="other" ng-model="other" ng-change="toggle()" ng-required="!(retail || commerce || moto || other)" required="required">
+                                <label class="custom-control-label" for="other"> Include Amex % </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 bottom">
+                        <label for="totalFee"> Other Auth fees <span style="color: red">*</span> </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">$</span>
+                            </div>
+                            <input id="feeAct" type="number" class="form-control" min="0" name="totalFee"
+                            placeholder="Amount (USD)" required="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-center"> Additional Fees </h2>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <strong> <label for="monthlyFee"> Monthly Fee <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="monthlyFee" type="number" title="Monthly Fee"
+                            placeholder="Amount (USD)" name="monthlyFee" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <strong> <label for="regulatoryFee"> Regulatory Fee <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="regulatoryFee" type="number" title="Regulatory Fee"
+                            placeholder="Amount (USD)" name="regulatoryFee" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <strong> <label for="pciFee"> PCI Compliance <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="pciFee" type="number" title="PCI Compliance"
+                            placeholder="Amount (USD)" name="pciFee" required>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <strong> <label for="techFee"> Tech Fee <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="techFee" type="number" title="Tech Fee"
+                            placeholder="Amount (USD)" name="techFee" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <strong> <label for="pos"> POS <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="pos" type="number" title="POS Fee"
+                            placeholder="Amount (USD)" name="pos" required>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <strong> <label for="misc"> Misc <span style="color: red">*</span> </label> </strong>
+                        <div>
+                            <input class="form-control" id="misc" type="number" title="Misc Fee"
+                            placeholder="Amount (USD)" name="misc" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+
+</html>
