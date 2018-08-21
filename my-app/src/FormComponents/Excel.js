@@ -8,7 +8,7 @@ let multiDataSet=[];
 const currency = (val) => {
     const v = `$ ${parseFloat(val).toLocaleString('en-US',
         {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
-    if(v != '$ NaN')
+    if(v !== '$ NaN')
         return v;
     else
         return ' ';
@@ -197,9 +197,7 @@ const setValues = (props) => {
                     {value: ""},
                     {value: ""},
                     {value: ""},
-                    {value: currency(parseFloat(props.value.monthlyFee) + parseFloat(props.value.regulatoryFee)
-                        + parseFloat(props.value.pciFee) + parseFloat(props.value.techFee) + parseFloat(props.value.pos)
-                        + parseFloat(props.value.misc)) }],
+                    {value: currency(props.value.Total.TotalAdditionalFee) }],
             ]
         },
         {
@@ -212,7 +210,7 @@ const setValues = (props) => {
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: currency(props.fee) || 0, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}],
+                    {value: currency(props.value.Total.Total_Fee) || 0, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}],
             ]
         },
         {
@@ -223,7 +221,7 @@ const setValues = (props) => {
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: `${parseFloat(((parseFloat(props.fee) || 0)/(parseFloat(props.value.volume) || 0)*100)).toFixed(2)} %`
+                    {value: `${parseFloat(((parseFloat(props.value.Total.Total_Fee) || 0)/(parseFloat(props.value.volume) || 0)*100)).toFixed(2)} %`
                     , style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}],
             ]
         }
@@ -233,8 +231,7 @@ const setValues = (props) => {
 const enableCondition = (values) => {
 
     for (let value of values) {
-        if(value <= 0 || (isNaN(value) && typeof value != "string")) {
-            console.log(`${value} true`);
+        if(value <= 0 || (isNaN(value) && typeof value !== "string")) {
             return true;
         }
     }
@@ -249,8 +246,6 @@ const Excel = (props) => {
     (props.value.VISA.Fee + props.value.Mastercard.Fee + props.value.Discover.Fee + props.value.AMEX.Fee),
     props.value.businessName, props.value.currentProvider, props.value.volume, props.value.ticket,
     props.value.transactions ];
-
-    console.log("V", values);
 
     return (
     <div style={{display: 'inline-block'}}>

@@ -2,26 +2,29 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import {updateStateValue} from "../actions";
 
+const ValueOf = (val) => (
+    parseFloat(val) || 0
+);
+
 class CardInput extends Component {
 
     handleChange(event) {
-        console.log('val', event.target.value);
         let val = '';
 
-        if(event.target.type == "number")
-            val = parseFloat(event.target.value);
+        if(event.target.type === "number")
+            val = ValueOf(event.target.value);
         else
             val = event.target.value;
 
         let key = event.target.name.split('_');
-        
+
         let getV = this.props.State[`${key[0]}`];
         getV[`${key[1]}`] = val;
 
         const newV = {};
 
-        let fee = ((parseFloat(getV['Volume']) || 0) * (parseFloat(getV['Percentage']) || 0)/100) +
-            ((parseFloat(getV['Number']) || 0) * (parseFloat(getV['Item']) || 0));
+        let fee = (ValueOf(getV['Volume']) * (ValueOf(getV['Percentage']))/100) +
+            (ValueOf(getV['Number'])) * (ValueOf(getV['Item']));
 
         fee = parseFloat(fee.toFixed(2));
 
@@ -30,8 +33,6 @@ class CardInput extends Component {
         newV[`${key[0]}`] = getV;
 
         this.props.updateStateValue('InputWithoutLabel', `${key[0]}`, getV);
-
-        console.log('STATE', this.props.State);
     }
 
     render() {

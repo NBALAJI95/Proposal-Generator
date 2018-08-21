@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c64bb5f0-1bf5-4496-a9f1-19f9e47eef23" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/FormComponents/Excel.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/FormComponents/Excel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/src/FormComponents/Heading.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/FormComponents/Heading.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/src/FormComponents/InputWithoutLabel.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/FormComponents/InputWithoutLabel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/src/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,8 +25,8 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/my-app/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="75" column="37" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
+            <state relative-caret-position="696">
+              <caret line="46" column="27" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -31,11 +34,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssociationNAuth.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/AssociationNAuth.js">
+      <file leaf-file-name="Excel.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Excel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="46">
-              <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            <state relative-caret-position="3680">
+              <caret line="160" column="27" lean-forward="true" selection-start-line="160" selection-start-column="27" selection-end-line="160" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -43,44 +49,8 @@
       <file leaf-file-name="AdditionalFee.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/AdditionalFee.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" selection-start-line="1" selection-end-line="2" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProcessingFee.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFee.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="4" selection-start-line="4" selection-end-line="5" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BusinessInfo.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/BusinessInfo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" selection-start-line="1" selection-end-line="2" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NameActions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/src/actions/NameActions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="13" column="24" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InputWithoutLabel.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/InputWithoutLabel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1311">
-              <caret line="66" column="50" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
+            <state relative-caret-position="434">
+              <caret line="57" column="65" selection-start-line="57" selection-start-column="65" selection-end-line="57" selection-end-column="65" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -88,11 +58,62 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ProcessingFee.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFee.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="483">
+              <caret line="29" column="65" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="65" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Heading.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Heading.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="4" column="56" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Total.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Total.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/my-app/public/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="549">
+              <caret line="42" column="206" selection-start-line="42" selection-start-column="206" selection-end-line="42" selection-end-column="206" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="NameReducer.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my-app/src/reducers/NameReducer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+            <state relative-caret-position="-95">
+              <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BusinessInfo.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/BusinessInfo.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-26">
+              <caret line="20" column="103" lean-forward="true" selection-start-line="20" selection-start-column="103" selection-end-line="20" selection-end-column="103" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,12 +121,10 @@
       <file leaf-file-name="InputWithLabel.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+            <state relative-caret-position="690">
+              <caret line="48" column="58" lean-forward="true" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="58" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-                <element signature="n#style#0;n#label#0;n#strong#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#strong#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,17 +142,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>App.css</find>
-      <find>props.</find>
-      <find>value</find>
-      <find>0,</find>
-      <find>parseInt</find>
-      <find>parse</find>
-      <find>form</find>
-      <find>google</find>
-      <find>$$$</find>
-      <find>totalFee</find>
-      <find>|| ''</find>
       <find>getEle</find>
       <find>combine</find>
       <find>value={}</find>
@@ -144,13 +152,26 @@
       <find>.value</find>
       <find>addName</find>
       <find>val</find>
-      <find>parseFloat</find>
       <find>handleChange</find>
       <find>checkChange</find>
       <find>check</find>
       <find>console</find>
       <find>State</find>
       <find>state.</find>
+      <find>this.props.State.</find>
+      <find>calculateAdditionalFee</find>
+      <find>calculateFee</find>
+      <find>updateStateValue</find>
+      <find>parseFloat</find>
+      <find>tabIndex</find>
+      <find>newFeeVal</find>
+      <find>requiredLabel</find>
+      <find>calculateTotalAdditionalFee</find>
+      <find>AdditionalFees</find>
+      <find>this.state.</find>
+      <find>newFees</find>
+      <find>red</find>
+      <find>TotalAdditionalFee</find>
     </findStrings>
     <replaceStrings>
       <replace>this.props.</replace>
@@ -161,6 +182,12 @@
       <replace>.State</replace>
       <replace />
       <replace>props.State.</replace>
+      <replace>State.</replace>
+      <replace>calculateProcessingFee</replace>
+      <replace>ValueOf</replace>
+      <replace>state.modalInput</replace>
+      <replace>className</replace>
+      <replace>this.props.State.</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -173,27 +200,27 @@
         <option value="$PROJECT_DIR$/my-app/src/App.css" />
         <option value="$PROJECT_DIR$/my-app/src/LabelWithInput.js" />
         <option value="$PROJECT_DIR$/my-app/src/FormComponents/LabelWithInput.js" />
-        <option value="$PROJECT_DIR$/my-app/src/FormComponents/Heading.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFees.js" />
-        <option value="$PROJECT_DIR$/my-app/src/FormComponents/Total.js" />
-        <option value="$PROJECT_DIR$/my-app/public/index.html" />
         <option value="$PROJECT_DIR$/my-app/server.js" />
         <option value="$PROJECT_DIR$/my-app/package.json" />
-        <option value="$PROJECT_DIR$/my-app/src/FormComponents/Excel.js" />
         <option value="$PROJECT_DIR$/my-app/src/actions/NameReducer.js" />
         <option value="$PROJECT_DIR$/my-app/src/actions/index.js" />
         <option value="$PROJECT_DIR$/my-app/src/index.js" />
         <option value="$PROJECT_DIR$/my-app/src/reducers/index.js" />
-        <option value="$PROJECT_DIR$/my-app/src/FormComponents/BusinessInfo.js" />
-        <option value="$PROJECT_DIR$/my-app/src/FormComponents/InputWithoutLabel.js" />
-        <option value="$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFee.js" />
-        <option value="$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js" />
-        <option value="$PROJECT_DIR$/my-app/src/FormComponents/AdditionalFee.js" />
         <option value="$PROJECT_DIR$/my-app/src/actions/NameActions.js" />
-        <option value="$PROJECT_DIR$/my-app/src/reducers/NameReducer.js" />
+        <option value="$PROJECT_DIR$/my-app/src/FormComponents/BusinessInfo.js" />
         <option value="$PROJECT_DIR$/my-app/src/FormComponents/AssociationNAuth.js" />
+        <option value="$PROJECT_DIR$/my-app/public/index.html" />
+        <option value="$PROJECT_DIR$/my-app/src/FormComponents/InputWithoutLabel.js" />
+        <option value="$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js" />
+        <option value="$PROJECT_DIR$/my-app/src/reducers/NameReducer.js" />
+        <option value="$PROJECT_DIR$/my-app/src/FormComponents/Total.js" />
+        <option value="$PROJECT_DIR$/my-app/src/FormComponents/AdditionalFee.js" />
+        <option value="$PROJECT_DIR$/my-app/src/FormComponents/Heading.js" />
+        <option value="$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFee.js" />
         <option value="$PROJECT_DIR$/my-app/src/App.js" />
+        <option value="$PROJECT_DIR$/my-app/src/FormComponents/Excel.js" />
       </list>
     </option>
   </component>
@@ -207,9 +234,10 @@
     <handled-path value="$PROJECT_DIR$/my-app/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-1" />
-    <option name="width" value="1922" />
-    <option name="height" value="1040" />
+    <option name="x" value="124" />
+    <option name="y" value="43" />
+    <option name="width" value="1594" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -274,7 +302,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/ReactNativeReduxCasts-master/auth" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.prettier" value="true" />
     <property name="node.js.path.for.package.prettier" value="project" />
     <property name="node.js.selected.package.prettier" value="" />
@@ -311,18 +339,20 @@
       <workItem from="1533739543433" duration="2331000" />
       <workItem from="1533742102351" duration="51799000" />
       <workItem from="1533929215236" duration="37141000" />
-      <workItem from="1534429498810" duration="34463000" />
+      <workItem from="1534429498810" duration="34783000" />
+      <workItem from="1534775098562" duration="19190000" />
+      <workItem from="1534799637024" duration="9761000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125734000" />
+    <option name="totallyTimeSpent" value="155005000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="1040" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24986738" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20742705" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3298122" />
@@ -367,6 +397,97 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1518">
+          <caret line="75" column="37" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/AssociationNAuth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" selection-start-line="4" selection-end-line="5" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/BusinessInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" selection-start-line="1" selection-end-line="2" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/actions/NameActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/InputWithoutLabel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1472">
+          <caret line="66" column="50" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/reducers/NameReducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1518">
+          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/AdditionalFee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="897">
@@ -411,8 +532,6 @@
           <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#strong#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#strong#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -515,32 +634,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Heading.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFees.js" />
-    <entry file="file://$PROJECT_DIR$/my-app/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="21" column="30" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="897">
-          <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -575,23 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Total.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Excel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5198">
-          <caret line="226" column="20" selection-start-line="226" selection-start-column="20" selection-end-line="226" selection-end-column="88" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/reducers/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -599,22 +680,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js">
+    <entry file="file://$PROJECT_DIR$/my-app/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="68" column="5" lean-forward="true" selection-start-line="68" selection-start-column="5" selection-end-line="68" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <element signature="n#style#0;n#label#0;n#strong#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#strong#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="230">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/BusinessInfo.js">
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/AssociationNAuth.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23">
-          <caret line="1" selection-start-line="1" selection-end-line="2" selection-end-column="35" />
+          <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -625,48 +701,98 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFee.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" selection-start-line="4" selection-end-line="5" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/InputWithoutLabel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="66" column="50" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
+        <state relative-caret-position="253">
+          <caret line="11" column="8" lean-forward="true" selection-start-line="11" selection-start-column="8" selection-end-line="34" selection-end-column="76" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/AdditionalFee.js">
+    <entry file="file://$PROJECT_DIR$/my-app/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" selection-start-line="1" selection-end-line="2" selection-end-column="35" />
+        <state relative-caret-position="549">
+          <caret line="42" column="206" selection-start-line="42" selection-start-column="206" selection-end-line="42" selection-end-column="206" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/BusinessInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-26">
+          <caret line="20" column="103" lean-forward="true" selection-start-line="20" selection-start-column="103" selection-end-line="20" selection-end-column="103" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/reducers/NameReducer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+        <state relative-caret-position="-95">
+          <caret line="41" column="44" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/AssociationNAuth.js">
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Total.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        <state relative-caret-position="92">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/InputWithLabel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="48" column="58" lean-forward="true" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Heading.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="4" column="56" selection-start-line="4" selection-start-column="56" selection-end-line="4" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/AdditionalFee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="57" column="65" selection-start-line="57" selection-start-column="65" selection-end-line="57" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/ProcessingFee.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="29" column="65" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/my-app/src/FormComponents/Excel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3680">
+          <caret line="160" column="27" lean-forward="true" selection-start-line="160" selection-start-column="27" selection-end-line="160" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/my-app/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="75" column="37" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
+        <state relative-caret-position="696">
+          <caret line="46" column="27" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

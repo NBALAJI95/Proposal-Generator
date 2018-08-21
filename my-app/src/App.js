@@ -9,41 +9,10 @@ import Excel from './FormComponents/Excel.js';
 import {connect} from "react-redux";
 import {resetForm} from "./actions";
 
-const cardDetails = () => ({
-    Volume: '', Number: '', Percentage: '', Item: '', Fee: ''
-});
-
-const STATE = {
-    businessName: '', currentProvider: '',
-    volume: '', ticket: '', transactions: '',
-    assoFee: '', authFee: '',
-    monthlyFee: '', regulatoryFee: '', pciFee: '',
-    techFee: '', pos: '', misc: '',
-    VISA: {
-        Volume: '', Number: '', Percentage: '', Item: '', Fee: ''
-    },
-    Mastercard: {
-        Volume: '', Number: '', Percentage: '', Item: '', Fee: ''
-    },
-    Discover: {
-        Volume: '', Number: '', Percentage: '', Item: '', Fee: ''
-    },
-    AMEX: {
-        Volume: '', Number: '', Percentage: '', Item: '', Fee: ''
-    },
-    amexCheck: false,
-    amexFee: ''
-};
-
 class App extends Component {
-  constructor(props) {
-      super(props);
-      this.state = STATE;
-  }
 
   reset() {
       this.props.resetForm();
-
       document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
@@ -53,6 +22,8 @@ class App extends Component {
   }
 
   render() {
+    console.log("Props in app", this.props);
+
     return (
       <div className="App">
 
@@ -73,8 +44,10 @@ class App extends Component {
                 <AdditionalFee />
 
                 <div style={{float: "right"}} className="form-group">
-                    <Excel fee={`7595`} value={this.state} />
-                    <button type="button" onClick={this.reset.bind(this)} style={{marginLeft: "10px"}} className="btn btn-secondary"> Reset </button>
+                    <Excel value={this.props.State} />
+                    <button type="button" onClick={this.reset.bind(this)} style={{marginLeft: "10px"}}
+                        className="btn btn-secondary"> Reset
+                    </button>
                 </div>
 
                 <br/>
