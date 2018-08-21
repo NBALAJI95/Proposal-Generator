@@ -14,22 +14,62 @@ const currency = (val) => {
         return ' ';
 };
 
-const setValues = (props) => {
+const Heading = (headingValue) => {
+    return ([[{value: headingValue, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+        {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+        {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+        {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+        {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+        {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+    ],]);
+};
+
+const feeValue = (label, value) => {
+    return ([{value: label},
+        {value: ""},
+        {value: ""},
+        {value: ""},
+        {value: ""},
+        {value: value}]);
+};
+
+const additionalFees = ({ AdditionalFees, Total }) => {
+    let returnVal = [];
+
+    const mapValues = {
+        monthlyFee: "Monthly Fee",
+        regulatoryFee: "Regulatory Fee",
+        pciFee: "PCI Compliance",
+        techFee: "Tech Fee",
+        pos: "POS",
+        misc: "Misc"
+    };
+
+    Object.keys(AdditionalFees).forEach((item, key) => {
+        returnVal.push( feeValue( (mapValues[item] || item), currency(AdditionalFees[`${item}`]) ) );
+    });
+
+    returnVal.push(feeValue("TOTAL", currency(Total.TotalAdditionalFee)));
+
+    return returnVal;
+};
+
+const setValues = ({ value }) => {
     multiDataSet = [
         {
-            columns: [`${props.value.businessName}`, "", "", "", "", ],
+            columns: [`${value.businessName}`, "", "", "", "", ],
             data: [
                 [
-                    {value: "TOTAL VOLUME"}, {value: currency(props.value.volume)},
+                    {value: "TOTAL VOLUME"}, {value: currency(value.volume)},
                 ],
                 [
-                    {value: "TOTAL TRANSACTIONS"}, {value: `${props.value.transactions}`},
+                    {value: "TOTAL TRANSACTIONS"}, {value: `${value.transactions}`},
                 ],
                 [
-                    {value: "AVG. TICKET"}, {value: currency(props.value.ticket) },
+                    {value: "AVG. TICKET"}, {value: currency(value.ticket) },
                 ],
                 [
-                    {value: "PROVIDER"}, {value: `${props.value.currentProvider}`},
+                    {value: "PROVIDER"}, {value: `${value.currentProvider}`},
                 ]
             ]
         },
@@ -43,63 +83,42 @@ const setValues = (props) => {
         },
         {
             columns: [],
-            data: [
-                [{value: "PROCESSING FEES", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                ],
-            ]
+            data: Heading("PROCESSING FEES")
         },
         {
             columns: ["", "VOLUME", "#", "%", "ITEM", "FEE"],
             data: [
                 [{value: "Visa"},
-                    {value: currency(props.value.VISA.Volume) },
-                    {value: `${props.value.VISA.Number}`},
-                    {value: `${props.value.VISA.Percentage}`},
-                    {value: currency(props.value.VISA.Item) },
-                    {value: currency(props.value.VISA.Fee) }],
+                    {value: currency(value.VISA.Volume) },
+                    {value: `${value.VISA.Number}`},
+                    {value: `${value.VISA.Percentage}`},
+                    {value: currency(value.VISA.Item) },
+                    {value: currency(value.VISA.Fee) }],
                 [{value: "Master Card"},
-                    {value: currency(props.value.Mastercard.Volume) },
-                    {value: `${props.value.Mastercard.Number}`},
-                    {value: `${props.value.Mastercard.Percentage}`},
-                    {value: currency(props.value.Mastercard.Item) },
-                    {value: currency(props.value.Mastercard.Fee) }],
+                    {value: currency(value.Mastercard.Volume) },
+                    {value: `${value.Mastercard.Number}`},
+                    {value: `${value.Mastercard.Percentage}`},
+                    {value: currency(value.Mastercard.Item) },
+                    {value: currency(value.Mastercard.Fee) }],
                 [{value: "DISCOVER"},
-                    {value: currency(props.value.Discover.Volume) },
-                    {value: `${props.value.Discover.Number}`},
-                    {value: `${props.value.Discover.Percentage}`},
-                    {value: currency(props.value.Discover.Item)},
-                    {value: currency(props.value.Discover.Fee) }],
+                    {value: currency(value.Discover.Volume) },
+                    {value: `${value.Discover.Number}`},
+                    {value: `${value.Discover.Percentage}`},
+                    {value: currency(value.Discover.Item)},
+                    {value: currency(value.Discover.Fee) }],
                 [{value: "AMEX"},
-                    {value: currency(props.value.AMEX.Volume) },
-                    {value: `${props.value.AMEX.Number}`},
-                    {value: `${props.value.AMEX.Percentage}`},
-                    {value: currency(props.value.AMEX.Item) },
-                    {value: currency(props.value.AMEX.Fee) }],
-                [{value: "TOTAL"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(`${props.value.VISA.Fee + props.value.Mastercard.Fee + props.value.Discover.Fee 
-                        + props.value.AMEX.Fee}`) }]
+                    {value: currency(value.AMEX.Volume) },
+                    {value: `${value.AMEX.Number}`},
+                    {value: `${value.AMEX.Percentage}`},
+                    {value: currency(value.AMEX.Item) },
+                    {value: currency(value.AMEX.Fee) }],
+                feeValue("TOTAL", currency(`${value.VISA.Fee + value.Mastercard.Fee + value.Discover.Fee
+                + value.AMEX.Fee}`))
             ]
         },
         {
             columns: [],
-            data: [
-                [{value: "ASSOCIATION FEES", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                ],
-            ]
+            data: Heading("ASSOCIATION FEES")
         },
         {
             columns: [],
@@ -107,98 +126,29 @@ const setValues = (props) => {
                 [{value: "AMEX"},
                     {value: ""},
                     {value: ""},
-                    {value: currency(props.value.amexFee) },
+                    {value: currency(value.amexFee) },
                     {value: ""},
                     {value: ""}],
-                [{value: "TOTAL"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.assoFee) }]
+                feeValue("TOTAL", currency(value.assoFee))
             ]
         },
         {
             columns: [],
-            data: [
-                [{value: "OTHER AUTH FEES", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                ],
-            ]
+            data: Heading("OTHER AUTH FEES")
         },
         {
             columns: [],
             data: [
-                [{value: "TOTAL"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.authFee) }]
+                feeValue("TOTAL", currency(value.authFee))
             ]
         },
         {
             columns: [],
-            data: [
-                [{value: "ADDITIONAL FEES", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                ],
-            ]
+            data: Heading("ADDITIONAL FEES")
         },
         {
             columns: [],
-            data: [
-                [{value: "Monthly Fee"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.monthlyFee) }],
-                [{value: "Regulatory Fee"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.regulatoryFee) }],
-                [{value: "PCI Compliance"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.pciFee) }],
-                [{value: "Tech Fee"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.techFee) }],
-                [{value: "POS"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.pos) }],
-                [{value: "Misc"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.misc) }],
-                [{value: "TOTAL"},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: ""},
-                    {value: currency(props.value.Total.TotalAdditionalFee) }],
-            ]
+            data: additionalFees(value)
         },
         {
             xSteps: 0,
@@ -210,7 +160,7 @@ const setValues = (props) => {
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: currency(props.value.Total.Total_Fee) || 0, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}],
+                    {value: currency(value.Total.Total_Fee) || 0, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}],
             ]
         },
         {
@@ -221,7 +171,7 @@ const setValues = (props) => {
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                     {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: `${parseFloat(((parseFloat(props.value.Total.Total_Fee) || 0)/(parseFloat(props.value.volume) || 0)*100)).toFixed(2)} %`
+                    {value: `${parseFloat(((parseFloat(value.Total.Total_Fee) || 0)/(parseFloat(value.volume) || 0)*100)).toFixed(2)} %`
                     , style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}],
             ]
         }
@@ -240,13 +190,11 @@ const enableCondition = (values) => {
 
 const Excel = (props) => {
     setValues(props);
-    const values = [props.fee, ((parseFloat(props.value.monthlyFee) || 0) + (parseFloat(props.value.regulatoryFee) || 0)
-    + (parseFloat(props.value.pciFee) || 0) + (parseFloat(props.value.techFee) || 0) + (parseFloat(props.value.pos) || 0)
-    + (parseFloat(props.value.misc) || 0)), parseFloat(props.value.authFee), parseFloat(props.value.assoFee),
-    (props.value.VISA.Fee + props.value.Mastercard.Fee + props.value.Discover.Fee + props.value.AMEX.Fee),
-    props.value.businessName, props.value.currentProvider, props.value.volume, props.value.ticket,
-    props.value.transactions ];
-
+    const { value } = props;
+    const values = [value.Total.Total_Fee, value.Total.TotalAdditionalFee, parseFloat(value.authFee), parseFloat(value.assoFee),
+        (value.VISA.Fee + value.Mastercard.Fee + value.Discover.Fee + value.AMEX.Fee),
+        value.businessName, value.currentProvider, value.volume, value.ticket,
+        value.transactions ];
     return (
     <div style={{display: 'inline-block'}}>
         <ExcelFile element={<input type="submit" className="btn btn-primary" disabled={enableCondition(values)} value="Submit" />}>

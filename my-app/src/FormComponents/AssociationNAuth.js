@@ -27,6 +27,7 @@ class AssociationNAuth extends Component {
     }
 
     render() {
+        const { amexCheck, assoFee, amexFee } = this.props.State;
         return (
             <div>
                 <Heading headingText={"Association & Auth"} />
@@ -38,7 +39,7 @@ class AssociationNAuth extends Component {
                                 title="Association Fees" min="0" required />
 
                             <div style={{paddingTop: "0.5rem"}} className="form-group">
-                                <input id="amex" checked={this.props.State.amexCheck}
+                                <input id="amex" checked={amexCheck}
                                    onChange={this.checkChange.bind(this)} type="checkbox" aria-label="Checkbox for AMEX" />
 
                                 <label style={{paddingLeft: "7px"}} htmlFor="amex">
@@ -47,7 +48,7 @@ class AssociationNAuth extends Component {
 
                                 {this.renderCheck()}
 
-                                {((parseFloat(this.props.State.assoFee) || 0) < (parseFloat(this.props.State.amexFee) || 0))? <b style={{color: 'red'}}> AMEX fee should be less than Association fee </b>: ""}
+                                {((parseFloat(assoFee) || 0) < (parseFloat(amexFee) || 0))? <b style={{color: 'red'}}> AMEX fee should be less than Association fee </b>: ""}
 
                             </div>
 

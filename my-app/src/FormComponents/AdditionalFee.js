@@ -9,6 +9,15 @@ const ValueOf = (val) => (
     parseFloat(val) || 0
 );
 
+const currency = (val) => {
+    const v = `$ ${parseFloat(val).toLocaleString('en-US',
+        {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
+    if(v !== '$ NaN')
+        return v;
+    else
+        return ' ';
+};
+
 class AdditionalFee extends Component {
     constructor(props) {
         super(props);
@@ -20,9 +29,10 @@ class AdditionalFee extends Component {
     }
 
     clickHandler() {
-        const newFeesVal = [...this.props.State.newFees, this.state.modalInput];
+        const { updateStateValue, State } = this.props;
+        const newFeesVal = [...State.newFees, this.state.modalInput];
         this.setState({modalInput: ''});
-        this.props.updateStateValue('ModalState', 'newFees', newFeesVal);
+        updateStateValue('ModalState', 'newFees', newFeesVal);
     }
 
 
@@ -53,6 +63,8 @@ class AdditionalFee extends Component {
     }
 
     render() {
+        const { State } = this.props;
+
         return (
             <div>
                 <Heading headingText={"Additional Fees"} required />
@@ -77,8 +89,8 @@ class AdditionalFee extends Component {
 
                     <div className="row">
                         <div className="col-sm-4">
-                            <InputWithLabel id="AdditionalFees_techFee" label="Tech Fees" placeholder="Amount (USD)" title="Tech Fees"
-                                min="0" />
+                            <InputWithLabel id="AdditionalFees_techFee" label="Tech Fees" placeholder="Amount (USD)"
+                                title="Tech Fees" min="0" />
                         </div>
 
                         <div className="col-sm-4">
@@ -122,14 +134,14 @@ class AdditionalFee extends Component {
                         </div>
                     </div>
 
-                    <Total label="additional fees" value={`$ ${this.props.State.Total.TotalAdditionalFee}`} />
+                    <Total label="additional fees" value={currency(State.Total.TotalAdditionalFee)} />
 
                     <hr/>
 
-                    <Total label="Fees" value={`$ ${this.props.State.Total.Total_Fee}`} />
+                    <Total label="Fees" value={`$ ${State.Total.Total_Fee}`} />
 
                     <Total label="Effective Rate"
-                       value={(ValueOf(( (this.props.State.Fee / ValueOf(this.props.State.volume)) * 100).toFixed(2))
+                       value={(ValueOf(( (State.Total.Total_Fee / ValueOf(State.volume)) * 100).toFixed(2))
                        || "N/A" )+ "%"} />
 
                     <hr/>

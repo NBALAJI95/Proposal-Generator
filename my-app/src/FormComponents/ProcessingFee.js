@@ -15,8 +15,10 @@ class ProcessingFee extends Component {
 
         let total = 0;
 
+        const { State } = this.props;
+
         array_val.forEach((val) => {
-            total += ValueOf(this.props.State[val].Fee);
+            total += ValueOf(State[val].Fee);
         });
 
         total = ValueOf(total.toFixed(2));

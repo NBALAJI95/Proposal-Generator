@@ -5,8 +5,8 @@ const checkRequired = (cond) => {
         return (<span style={{color: 'red'}}> *</span>);
 };
 
-const Heading = (props) => (
-    <h2 style={styleHeading}> {props.headingText} {checkRequired(props.required)} </h2>
+const Heading = ({headingText, required}) => (
+    <h2 style={styleHeading}> {headingText} {checkRequired(required)} </h2>
 );
 
 const styleHeading = {

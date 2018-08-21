@@ -75,7 +75,7 @@ class InputWithLabel extends Component {
 
                 return (
                     <input onFocus={this.focus.bind(this)} type={this.props.type || "number"}
-                       value={parseFloat(this.props.State.AdditionalFees[name[1]]) || ''} className="form-control" id={this.props.id}
+                       value={ValueOf(parseFloat(this.props.State.AdditionalFees[name[1]])) || ''} className="form-control" id={this.props.id}
                        name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
                        required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min}/>
                 );
@@ -84,7 +84,7 @@ class InputWithLabel extends Component {
         else {
             return (
                 <input onFocus={this.focus.bind(this)} type={this.props.type || "number"}
-                       value={this.props.State[this.props.id]} className="form-control" id={this.props.id}
+                       value={ValueOf(this.props.State[this.props.id]) || ''} className="form-control" id={this.props.id}
                        name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
                        required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min}/>
             );
