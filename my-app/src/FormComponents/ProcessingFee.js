@@ -3,7 +3,6 @@ import CardInput from './InputWithoutLabel';
 import Heading from './Heading.js';
 import Total from './Total.js';
 import {connect} from "react-redux";
-import {updateStateValue} from "../actions";
 
 const ValueOf = (val) => (
     parseFloat(val) || 0
@@ -15,10 +14,8 @@ class ProcessingFee extends Component {
 
         let total = 0;
 
-        const { State } = this.props;
-
         array_val.forEach((val) => {
-            total += ValueOf(State[val].Fee);
+            total += ValueOf(this.StateV[val].Fee);
         });
 
         total = ValueOf(total.toFixed(2));
@@ -27,6 +24,9 @@ class ProcessingFee extends Component {
     }
     
     render() {
+        const { partA, partB } = this.props.State;
+        this.StateV = (this.props.typeVal) ? partB : partA;
+
         return (
             <div>
                 <Heading headingText={"Processing Fees"} required />
@@ -60,19 +60,19 @@ class ProcessingFee extends Component {
                 <hr/>
 
                 <div className="form-group">
-                    <CardInput id="VISA" label={"VISA"} />
+                    <CardInput id="VISA" partB={this.props.typeVal} label={"VISA"} />
                 </div>
 
                 <div className="form-group">
-                    <CardInput id="Mastercard" label={"Mastercard"} />
+                    <CardInput id="Mastercard" partB={this.props.typeVal} label={"Mastercard"} />
                 </div>
 
                 <div className="form-group">
-                    <CardInput id="Discover" label={"Discover"} />
+                    <CardInput id="Discover" partB={this.props.typeVal} label={"Discover"} />
                 </div>
 
                 <div className="form-group">
-                    <CardInput id="AMEX" label={"AMEX"} />
+                    <CardInput id="AMEX" partB={this.props.typeVal} label={"AMEX"} />
                 </div>
 
                 <Total label="processing fees" value={`$ ${this.calculateProcessingFee()}`} />
@@ -85,4 +85,4 @@ const mapStateToProps = (stateV) => {
     return (stateV);
 };
 
-export default connect(mapStateToProps, {updateStateValue})(ProcessingFee);
+export default connect(mapStateToProps)(ProcessingFee);

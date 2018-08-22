@@ -1,4 +1,4 @@
-const INITIAL_STATE = () => ({
+const INITIAL_STATE_A = () => ({
     businessName: '', currentProvider: '',
     volume: '', ticket: '', transactions: '',
     assoFee: '', authFee: '',
@@ -21,50 +21,75 @@ const INITIAL_STATE = () => ({
     amexFee: '',
 });
 
+const INITIAL_STATE = () => (
+    Object.assign({}, {partA: INITIAL_STATE_A()}, {partB: INITIAL_STATE_A()})
+);
+
 const ValueOf = (val) => (
     parseFloat(val) || 0
 );
 
-const calculateTotal = (State) => {
+const calculateTotal = (State, part) => {
     const norm_val = ['assoFee', 'authFee'];
     const array_val = ['VISA', 'Mastercard', 'Discover', 'AMEX'];
 
     let total = 0;
 
-    norm_val.forEach((val) => {
-        total += ValueOf(State[val]);
-    });
-
-    array_val.forEach((val) => {
-        total += ValueOf(State[val].Fee);
-    });
-
-    const additional = State.AdditionalFees;
+    const additional = State[part].AdditionalFees;
 
     Object.values(additional).forEach((val) => {
         total += ValueOf(val);
     });
 
+    const additionalTotal = total;
+
+    norm_val.forEach((val) => {
+        total += ValueOf(State[part][val]);
+    });
+
+    array_val.forEach((val) => {
+        /*console.log("State[part]", State[part]);
+        console.log("[val]", val);
+        console.log("State[part][val]", State[part][val]);*/
+        total += ValueOf(State[part][val].Fee);
+    });
+
     total = parseFloat(total.toFixed(2));
 
+    /*const appendVal = {[action.name]: action.val};
+    const valueP = Object.assign({}, state[action.part], appendVal);
+    return calculateTotal(Object.assign({}, state, {[action.part]: valueP}), action.part);*/
 
-    return Object.assign({}, State, {Total: {Total_Fee: total, TotalAdditionalFee: State.Total.TotalAdditionalFee}});
+    const step1 = Object.assign({}, State[part], {Total: {Total_Fee: total, TotalAdditionalFee: additionalTotal}});
+    return Object.assign({}, State, {[part]: step1});
 };
+
+/*const calculate = () => {
+    CalculateTotal();
+};*/
 
 export default (state = INITIAL_STATE(), action) => {
 
     switch (action.type) {
-        case 'NAME':
-            return calculateTotal(Object.assign({}, state, {name: action.data}));
+        /*case 'NAME':
+            // action.part
+            // 888888888888888888888888888888888888888888888888888888888888888888
+            const valueT = Object.assign({}, state[action.part], {[action.part]: {name: action.data}});
+            return calculateTotal(Object.assign({}, state, valueT), action.part);*/
         case 'InputWithLabel':
         case 'InputWithoutLabel':
         case 'ModalState':
         case 'Total':
             const appendVal = {[action.name]: action.val};
-            return calculateTotal(Object.assign({}, state, appendVal));
+            const valueP = Object.assign({}, state[action.part], appendVal);
+            return calculateTotal(Object.assign({}, state, {[action.part]: valueP}), action.part);
         case 'TOGGLE_CHECK':
-            const check = !(state.amexCheck);
-            return calculateTotal(Object.assign({}, state, {amexCheck: check}));
+            console.log("&&&&&&&&&&&state", state);
+            console.log("action.part", action.part);
+            const check = !(state[action.part].amexCheck);
+            console.log("checkbox value", check);
+            const valueT = Object.assign({}, state[action.part], {amexCheck: check}, (check)?{}:{amexFee: ''});
+            return calculateTotal(Object.assign({}, state, {[action.part]: valueT}), action.part);
         case 'RESET':
             return INITIAL_STATE();
         default:

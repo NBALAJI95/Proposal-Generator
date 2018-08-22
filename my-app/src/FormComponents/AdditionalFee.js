@@ -21,16 +21,17 @@ const currency = (val) => {
 class AdditionalFee extends Component {
     constructor(props) {
         super(props);
-        this.state = { modalInput: ''};
+        this.state = { modalInput_partA: '', modalInput_partB: ''};
     }
 
     changeHandler(event) {
-        this.setState({modalInput: event.target.value});
+        console.log(`(this.props.typeVal || "partA") ${(this.props.typeVal)}`);
+        this.setState({[`modalInput_${(this.props.typeVal || "partA")}`]: event.target.value});
     }
 
     clickHandler() {
-        const { updateStateValue, State } = this.props;
-        const newFeesVal = [...State.newFees, this.state.modalInput];
+        const { updateStateValue } = this.props;
+        const newFeesVal = [...this.StateV.newFees, this.state[`modalInput_${(this.props.typeVal || "partA")}`]];
         this.setState({modalInput: ''});
         updateStateValue('ModalState', 'newFees', newFeesVal);
     }
@@ -41,7 +42,8 @@ class AdditionalFee extends Component {
 
         for(let i = 0; i < e.length; i++) {
             returnVal.push(<div className="col-sm-4" key={`${e[i]}_${i}`}>
-                            <InputWithLabel id={`AdditionalFees_${e[i]}`} label={e[i]} placeholder="Amount (USD)" title={e[i]} min="0" />
+                            <InputWithLabel id={`AdditionalFees_${e[i]}`} label={e[i]} placeholder="Amount (USD)"
+                                title={e[i]} min="0" partB={this.props.typeVal} />
                           </div>);
         }
 
@@ -49,7 +51,7 @@ class AdditionalFee extends Component {
     }
 
     renderNewElements() {
-        const newElements = this.props.State.newFees;
+        const newElements = this.StateV.newFees;
         const returnComponent = [];
         const iterations = Math.ceil(newElements.length / 3);
         let j = 0;
@@ -63,7 +65,14 @@ class AdditionalFee extends Component {
     }
 
     render() {
-        const { State } = this.props;
+        const { partA, partB } = this.props.State;
+        this.StateV = (this.props.typeVal) ? partB : partA;
+
+        console.log(`(%%%%%%%%5this.props.typeVal || "partA") ${(this.props.typeVal)}`);
+
+        // const { State } = this.props;
+
+        console.log("Local State", this.state);
 
         return (
             <div>
@@ -73,34 +82,34 @@ class AdditionalFee extends Component {
                     <div className="row">
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_monthlyFee" label="Monthly Fees" placeholder="Amount (USD)"
-                                title="Monthly Fees" min="0" />
+                                title="Monthly Fees" min="0" partB={this.props.typeVal} />
                         </div>
 
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_regulatoryFee" label="Regulatory Fees" placeholder="Amount (USD)"
-                                title="Regulatory Fees" min="0" />
+                                title="Regulatory Fees" min="0" partB={this.props.typeVal} />
                         </div>
 
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_pciFee" label="PCI Compliance Fees" placeholder="Amount (USD)"
-                                title="PCI Compliance Fees" min="0" />
+                                title="PCI Compliance Fees" min="0" partB={this.props.typeVal} />
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_techFee" label="Tech Fees" placeholder="Amount (USD)"
-                                title="Tech Fees" min="0" />
+                                title="Tech Fees" min="0" partB={this.props.typeVal} />
                         </div>
 
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_pos" label="POS Fees" placeholder="Amount (USD)" title="POS Fees"
-                                min="0" />
+                                min="0" partB={this.props.typeVal} />
                         </div>
 
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_misc" label="Misc Fees" placeholder="Amount (USD)" title="Misc Fees"
-                                min="0" />
+                                min="0" partB={this.props.typeVal} />
                         </div>
 
                     </div>
@@ -123,7 +132,7 @@ class AdditionalFee extends Component {
                                     </button>
                                 </div>
                                 <div className="modal-body">
-                                    <input id="newFee" value={this.state.modalInput} name="newFee" type="text"
+                                    <input id="newFee" value={this.state[`modalInput_${(this.props.typeVal || "partA")}`]} name="newFee" type="text"
                                            onChange={this.changeHandler.bind(this)} />
                                 </div>
                                 <div className="modal-footer">
@@ -134,14 +143,14 @@ class AdditionalFee extends Component {
                         </div>
                     </div>
 
-                    <Total label="additional fees" value={currency(State.Total.TotalAdditionalFee)} />
+                    <Total label="additional fees" value={currency(this.StateV.Total.TotalAdditionalFee)} />
 
                     <hr/>
 
-                    <Total label="Fees" value={`$ ${State.Total.Total_Fee}`} />
+                    <Total label="Fees" value={`$ ${this.StateV.Total.Total_Fee}`} />
 
                     <Total label="Effective Rate"
-                       value={(ValueOf(( (State.Total.Total_Fee / ValueOf(State.volume)) * 100).toFixed(2))
+                       value={(ValueOf(( (this.StateV.Total.Total_Fee / ValueOf(this.StateV.volume)) * 100).toFixed(2))
                        || "N/A" )+ "%"} />
 
                     <hr/>

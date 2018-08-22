@@ -190,11 +190,13 @@ const enableCondition = (values) => {
 
 const Excel = (props) => {
     setValues(props);
+
     const { value } = props;
     const values = [value.Total.Total_Fee, value.Total.TotalAdditionalFee, parseFloat(value.authFee), parseFloat(value.assoFee),
         (value.VISA.Fee + value.Mastercard.Fee + value.Discover.Fee + value.AMEX.Fee),
         value.businessName, value.currentProvider, value.volume, value.ticket,
         value.transactions ];
+
     return (
     <div style={{display: 'inline-block'}}>
         <ExcelFile element={<input type="submit" className="btn btn-primary" disabled={enableCondition(values)} value="Submit" />}>

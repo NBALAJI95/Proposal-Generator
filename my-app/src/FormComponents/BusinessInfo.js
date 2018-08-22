@@ -12,12 +12,12 @@ class BusinessInfo extends Component {
                 <div className="form-group">
                     <div className="row">
                         <div className="col-sm-6">
-                        <InputWithLabel id="businessName" type="text" label="Business Name" placeholder="eg. John Smith"
-                            title="Type your Business Name here" required />
+                        <InputWithLabel id="businessName" partB={this.props.typeVal} type="text" label="Business Name"
+                            placeholder="eg. John Smith" title="Type your Business Name here" required />
                         </div>
 
                         <div className="col-sm-6">
-                            <InputWithLabel id="currentProvider" type="text" label="Current Provider"
+                            <InputWithLabel id="currentProvider" partB={this.props.typeVal} type="text" label="Current Provider"
                                 placeholder="eg. Clover" title="Type your Current Provider" required />
                         </div>
                     </div>
@@ -26,18 +26,18 @@ class BusinessInfo extends Component {
                 <div className="form-group">
                     <div className="row">
                         <div className="col-sm-4">
-                            <InputWithLabel id="volume" type="number" label="Volume" title="Total Volume"
-                                placeholder="Amount (USD)" min="0" required />
+                            <InputWithLabel id="volume" partB={this.props.typeVal} type="number" label="Volume"
+                                title="Total Volume" placeholder="Amount (USD)" min="0" required />
                         </div>
 
                         <div className="col-sm-4">
-                            <InputWithLabel id="ticket" label="Average Ticket" title="Total Volume"
-                                placeholder="Amount (USD)" min="0" required />
+                            <InputWithLabel id="ticket" partB={this.props.typeVal} label="Average Ticket"
+                                title="Total Average Ticket" placeholder="Amount (USD)" min="0" required />
                         </div>
 
                         <div className="col-sm-4">
-                            <InputWithLabel id="transactions" label="Total Transactions" placeholder="eg. 75"
-                                title="Total Transactions" min="0" required />
+                            <InputWithLabel id="transactions" partB={this.props.typeVal} label="Total Transactions"
+                                placeholder="eg. 75" title="Total Transactions" min="0" required />
                         </div>
                     </div>
                 </div>

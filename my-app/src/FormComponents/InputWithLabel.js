@@ -30,21 +30,30 @@ const ValueOf = (val) => (
     parseFloat(val) || 0
 );
 
-const calculateTotalAdditionalFee = (AdditionalFee) => {
+/*const calculateTotalAdditionalFee = (AdditionalFee) => {
     let total = 0;
 
     Object.values(AdditionalFee).forEach((item, key) => {
         total += ValueOf(item);
     });
     return total;
+};*/
+
+const removeNaN = (type, val) => {
+    if(type === "number") {
+        return (ValueOf(val) === 0) ? '' : val;
+    }
+    else
+        return val;
 };
 
 class InputWithLabel extends Component {
+    
     focus() {
         // console.log("Focused");
     }
 
-    requiredLabel(req) {
+    static requiredLabel(req) {
         if(req)
             return (<span style={{color: 'red'}}> *</span>);
     }
@@ -59,23 +68,28 @@ class InputWithLabel extends Component {
 
         if(event.target.name.indexOf("_") >= 0) {
             name = event.target.name.split('_');
-            val = Object.assign({}, this.props.State[`${name[0]}`], {[name[1]]: val});
+            val = Object.assign({}, this.StateV[`${name[0]}`], {[name[1]]: val});
             name = name[0];
-            if(name === "AdditionalFees")
-                this.props.updateStateValue('Total', "Total", {TotalAdditionalFee: calculateTotalAdditionalFee(val)});
+            /*if(name === "AdditionalFees")
+                this.props.updateStateValue('Total', "Total", {TotalAdditionalFee: calculateTotalAdditionalFee(val)},
+                    this.props.partB);*/
         }
 
-        this.props.updateStateValue('InputWithLabel', name, val);
+        this.props.updateStateValue('InputWithLabel', name, val, (this.props.partB || 'partA'));
     }
+
+/*
+partB={this.props.typeVal}
+*/
 
     renderInput() {
         if(this.props.id.indexOf("_") >= 0) {
             const name = this.props.id.split('_');
+            
             if(name[0] === 'AdditionalFees') {
-
                 return (
                     <input onFocus={this.focus.bind(this)} type={this.props.type || "number"}
-                       value={ValueOf(parseFloat(this.props.State.AdditionalFees[name[1]])) || ''} className="form-control" id={this.props.id}
+                       value={removeNaN(this.props.type || "number", this.StateV.AdditionalFees[name[1]])} className="form-control" id={`${this.props.id}_${(this.props.partB || 'partA')}`}
                        name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
                        required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min}/>
                 );
@@ -84,7 +98,7 @@ class InputWithLabel extends Component {
         else {
             return (
                 <input onFocus={this.focus.bind(this)} type={this.props.type || "number"}
-                       value={ValueOf(this.props.State[this.props.id]) || ''} className="form-control" id={this.props.id}
+                       value={removeNaN(this.props.type || "number", this.StateV[this.props.id])} className="form-control" id={`${this.props.id}_${(this.props.partB || 'partA')}`}
                        name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
                        required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min}/>
             );
@@ -92,12 +106,15 @@ class InputWithLabel extends Component {
     }
 
     render() {
+        const { partA, partB } = this.props.State;
+        this.StateV = (this.props.partB) ? partB : partA;
+
         return (
             <div>
                 <strong>
-                    <label htmlFor={this.props.id} style={{marginTop: '0.5rem'}}>
+                    <label htmlFor={`${this.props.id}_${(this.props.partB || 'partA')}`} style={{marginTop: '0.5rem'}}>
                         {this.props.label}
-                        {this.requiredLabel(this.props.required)}
+                        {InputWithLabel.requiredLabel(this.props.required)}
                     </label>
                 </strong>
 

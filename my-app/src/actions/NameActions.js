@@ -1,7 +1,7 @@
 
-export const updateStateValue = (type, name, val) => (
+export const updateStateValue = (type, name, val, part) => (
     {
-        type, name, val
+        type, name, val, part
     }
 );
 
@@ -11,9 +11,10 @@ export const resetForm = () => (
     }
 );
 
-export const toggleCheck = () => (
+export const toggleCheck = (part) => (
     {
-        type: 'TOGGLE_CHECK'
+        type: 'TOGGLE_CHECK',
+        part
     }
 );
 

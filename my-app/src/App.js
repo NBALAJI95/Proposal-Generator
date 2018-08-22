@@ -44,13 +44,23 @@ class App extends Component {
                 <AdditionalFee />
 
                 <div style={{float: "right"}} className="form-group">
-                    <Excel value={this.props.State} />
+                    {/*<Excel value={this.props.State} />*/}
                     <button type="button" onClick={this.reset.bind(this)} style={{marginLeft: "10px"}}
                         className="btn btn-secondary"> Reset
                     </button>
                 </div>
 
-                <br/>
+                <br/><br/>
+
+                <h2> Part B </h2>
+
+                <BusinessInfo typeVal="partB" />
+
+                <ProcessingFee typeVal="partB" />
+
+                <AssociationNAuth typeVal="partB" />
+
+                <AdditionalFee typeVal="partB" />
 
             </form>
         </div>
