@@ -5,9 +5,16 @@ export const updateStateValue = (type, name, val, part) => (
     }
 );
 
-export const resetForm = () => (
+export const resetForm = (part) => (
     {
-        type: 'RESET'
+        type: 'RESET',
+        part
+    }
+);
+
+export const fetchForm = () => (
+    {
+        type: 'FETCH'
     }
 );
 

@@ -21,19 +21,18 @@ const currency = (val) => {
 class AdditionalFee extends Component {
     constructor(props) {
         super(props);
-        this.state = { modalInput_partA: '', modalInput_partB: ''};
+        this.state = { modalInput: ''};
     }
 
     changeHandler(event) {
-        console.log(`(this.props.typeVal || "partA") ${(this.props.typeVal)}`);
-        this.setState({[`modalInput_${(this.props.typeVal || "partA")}`]: event.target.value});
+        this.setState({modalInput: event.target.value}, () => {console.log("Local State", this.state);});
     }
 
     clickHandler() {
         const { updateStateValue } = this.props;
-        const newFeesVal = [...this.StateV.newFees, this.state[`modalInput_${(this.props.typeVal || "partA")}`]];
+        const newFeesVal = [...this.StateV.newFees, this.state.modalInput];
         this.setState({modalInput: ''});
-        updateStateValue('ModalState', 'newFees', newFeesVal);
+        updateStateValue('ModalState', 'newFees', newFeesVal, (this.props.typeVal) ? 'partB' : 'partA');
     }
 
 
@@ -64,15 +63,55 @@ class AdditionalFee extends Component {
         return returnComponent;
     }
 
+    renderModal(Id, part) {
+        return (
+            <div>
+                <button type="button" className="btn btn-primary" data-toggle="modal" data-target={`#${Id}`}>
+                    Add New Additional Fees
+                </button>
+
+                <div className="modal fade" id={Id} tabIndex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <input id={part} value={this.state.modalInput} name="newFee" type="text"
+                                   onChange={this.changeHandler.bind(this)}/>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close
+                                </button>
+                                <button type="button" onClick={this.clickHandler.bind(this)} className="btn btn-primary">
+                                    Save changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    renderAddNewAdditionalFee() {
+        if(!this.props.typeVal) {
+            return this.renderModal('exampleModal1', 'partA');
+        }
+        else {
+            return this.renderModal('exampleModal2', 'partB');
+        }
+    }
+
     render() {
         const { partA, partB } = this.props.State;
         this.StateV = (this.props.typeVal) ? partB : partA;
 
-        console.log(`(%%%%%%%%5this.props.typeVal || "partA") ${(this.props.typeVal)}`);
-
         // const { State } = this.props;
-
-        console.log("Local State", this.state);
 
         return (
             <div>
@@ -118,30 +157,7 @@ class AdditionalFee extends Component {
 
                     <br/>
 
-                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Add New Additional Fees
-                    </button>
-
-                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-dialog" role="document">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div className="modal-body">
-                                    <input id="newFee" value={this.state[`modalInput_${(this.props.typeVal || "partA")}`]} name="newFee" type="text"
-                                           onChange={this.changeHandler.bind(this)} />
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={this.clickHandler.bind(this)} className="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {this.renderAddNewAdditionalFee()}
 
                     <Total label="additional fees" value={currency(this.StateV.Total.TotalAdditionalFee)} />
 

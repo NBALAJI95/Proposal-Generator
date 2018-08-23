@@ -40,10 +40,10 @@ class AssociationNAuth extends Component {
                                 title="Association Fees" min="0" required />
 
                             <div style={{paddingTop: "0.5rem"}} className="form-group">
-                                <input id="amex" checked={amexCheck}
+                                <input id={`amex_${(this.props.typeVal) || "partA"}`} checked={amexCheck}
                                    onChange={this.checkChange.bind(this)} type="checkbox" aria-label="Checkbox for AMEX" />
 
-                                <label style={{paddingLeft: "7px"}} htmlFor="amex">
+                                <label style={{paddingLeft: "7px"}} htmlFor={`amex_${(this.props.typeVal) || "partA"}`}>
                                     Specify Amex Value
                                 </label>
 

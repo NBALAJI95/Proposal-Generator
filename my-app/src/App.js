@@ -5,24 +5,50 @@ import BusinessInfo from './FormComponents/BusinessInfo.js';
 import ProcessingFee from './FormComponents/ProcessingFee.js';
 import AdditionalFee from './FormComponents/AdditionalFee.js';
 import AssociationNAuth from './FormComponents/AssociationNAuth.js';
+import Total from './FormComponents/Total.js';
 import Excel from './FormComponents/Excel.js';
 import {connect} from "react-redux";
-import {resetForm} from "./actions";
+import {resetForm, fetchForm} from "./actions";
+
+const withoutCurrency = (val) => {
+    const v = `${parseFloat(val).toLocaleString('en-US',
+        {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
+    if(v !== '$ NaN')
+        return v;
+    else
+        return ' ';
+};
+
+const currency = (val) => {
+    const v = `$ ${parseFloat(val).toLocaleString('en-US',
+        {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
+    if(v !== '$ NaN')
+        return v;
+    else
+        return ' ';
+};
 
 class App extends Component {
 
-  reset() {
-      this.props.resetForm();
+  reset(part) {
+      this.props.resetForm(part);
       document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
+  fetchToPartB() {
+      this.props.fetchForm();
+  }
+
   handleSubmit(event) {
-      this.reset();
+      this.reset("partA");
+      this.reset("partB");
       event.preventDefault();
   }
 
   render() {
     console.log("Props in app", this.props);
+
+    const { partA, partB } = this.props.State;
 
     return (
       <div className="App">
@@ -45,14 +71,17 @@ class App extends Component {
 
                 <div style={{float: "right"}} className="form-group">
                     {/*<Excel value={this.props.State} />*/}
-                    <button type="button" onClick={this.reset.bind(this)} style={{marginLeft: "10px"}}
-                        className="btn btn-secondary"> Reset
+                    <button type="button" onClick={this.reset.bind(this, "partA")} style={{marginLeft: "10px"}}
+                            className="btn btn-secondary"> Reset A
+                    </button>
+                    <button type="button" onClick={this.fetchToPartB.bind(this)} style={{marginLeft: "10px"}}
+                        className="btn btn-success"> FETCH TO PART B
                     </button>
                 </div>
 
-                <br/><br/>
+                <br/><br/><br/>
 
-                <h2> Part B </h2>
+                <h2 className="text-center"> Part B </h2>
 
                 <BusinessInfo typeVal="partB" />
 
@@ -61,6 +90,23 @@ class App extends Component {
                 <AssociationNAuth typeVal="partB" />
 
                 <AdditionalFee typeVal="partB" />
+
+                <Total label="Monthly Savings" value={currency((partA.Total.Total_Fee) - (partB.Total.Total_Fee))} />
+
+                <Total label="Savings %" value={withoutCurrency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee)) / (partA.Total.Total_Fee) * 100)+"%"} />
+
+                <Total label="1 Year Savings" value={currency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee)) * 12 )} />
+
+                <Total label="3 Years Savings" value={currency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee)) * 12 * 3 )} />
+
+                <div style={{float: "right"}} className="form-group">
+                    <button type="button" onClick={this.reset.bind(this, "partB")} style={{marginRight: "10px"}}
+                            className="btn btn-secondary"> Reset B
+                    </button>
+                    <Excel value={this.props.State} />
+                </div>
+
+                <br/>
 
             </form>
         </div>
@@ -73,4 +119,4 @@ const mapStateToProps = (stateV) => {
     return (stateV);
 };
 
-export default connect(mapStateToProps, {resetForm})(App);
+export default connect(mapStateToProps, {resetForm, fetchForm})(App);

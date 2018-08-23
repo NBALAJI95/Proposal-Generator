@@ -48,17 +48,10 @@ const calculateTotal = (State, part) => {
     });
 
     array_val.forEach((val) => {
-        /*console.log("State[part]", State[part]);
-        console.log("[val]", val);
-        console.log("State[part][val]", State[part][val]);*/
         total += ValueOf(State[part][val].Fee);
     });
 
     total = parseFloat(total.toFixed(2));
-
-    /*const appendVal = {[action.name]: action.val};
-    const valueP = Object.assign({}, state[action.part], appendVal);
-    return calculateTotal(Object.assign({}, state, {[action.part]: valueP}), action.part);*/
 
     const step1 = Object.assign({}, State[part], {Total: {Total_Fee: total, TotalAdditionalFee: additionalTotal}});
     return Object.assign({}, State, {[part]: step1});
@@ -71,11 +64,6 @@ const calculateTotal = (State, part) => {
 export default (state = INITIAL_STATE(), action) => {
 
     switch (action.type) {
-        /*case 'NAME':
-            // action.part
-            // 888888888888888888888888888888888888888888888888888888888888888888
-            const valueT = Object.assign({}, state[action.part], {[action.part]: {name: action.data}});
-            return calculateTotal(Object.assign({}, state, valueT), action.part);*/
         case 'InputWithLabel':
         case 'InputWithoutLabel':
         case 'ModalState':
@@ -91,7 +79,9 @@ export default (state = INITIAL_STATE(), action) => {
             const valueT = Object.assign({}, state[action.part], {amexCheck: check}, (check)?{}:{amexFee: ''});
             return calculateTotal(Object.assign({}, state, {[action.part]: valueT}), action.part);
         case 'RESET':
-            return INITIAL_STATE();
+            return Object.assign({}, state, {[action.part]:INITIAL_STATE_A()});
+        case 'FETCH':
+            return Object.assign({}, state, {partB: state.partA});
         default:
             return state;
     }
