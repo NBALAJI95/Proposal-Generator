@@ -40,10 +40,11 @@ class AdditionalFee extends Component {
         const returnVal = [];
 
         for(let i = 0; i < e.length; i++) {
-            returnVal.push(<div className="col-sm-4" key={`${e[i]}_${i}`}>
-                            <InputWithLabel id={`AdditionalFees_${e[i]}`} label={e[i]} placeholder="Amount (USD)"
-                                title={e[i]} min="0" partB={this.props.typeVal} />
-                          </div>);
+            returnVal.push(
+                <div className="col-sm-4" key={`${e[i]}_${i}`}>
+                    <InputWithLabel id={`AdditionalFees_${e[i]}`} label={e[i]} placeholder="Amount (USD)"
+                        title={e[i]} min="0" partB={this.props.typeVal} />
+                  </div>);
         }
 
         return returnVal;

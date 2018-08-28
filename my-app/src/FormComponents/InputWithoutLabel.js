@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import {updateStateValue} from "../actions";
+import InputWithLabel from './InputWithLabel.js';
 
 const ValueOf = (val) => (
     parseFloat(val) || 0
@@ -48,33 +49,28 @@ class CardInput extends Component {
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Volume`} name={`${id}_Volume`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="Volume" onChange={this.handleChange.bind(this)}
-                       value={this.StateV[id].Volume} />
+                    <InputWithLabel id={`Processing_${id}_Volume_${(this.props.partB || "partA")}`} placeholder="Volume (USD)"
+                        title="Volume" min="0" partB={this.props.partB} />
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Number`} name={`${id}_Number`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="#" onChange={this.handleChange.bind(this)}
-                       value={this.StateV[id].Number} />
+                    <InputWithLabel id={`Processing_${id}_Number_${(this.props.partB || "partA")}`} placeholder="#"
+                        title="#" min="0" partB={this.props.partB} />
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Percentage`} name={`${id}_Percentage`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="%" onChange={this.handleChange.bind(this)}
-                       value={this.StateV[id].Percentage} />
+                    <InputWithLabel id={`Processing_${id}_Percentage_${(this.props.partB || "partA")}`} placeholder="%"
+                        title="%" min="0" partB={this.props.partB} />
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Item`} name={`${id}_Item`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="Item" onChange={this.handleChange.bind(this)}
-                       value={this.StateV[id].Item} />
+                    <InputWithLabel id={`Processing_${id}_Item_${(this.props.partB || "partA")}`} placeholder="%"
+                        title="%" min="0" partB={this.props.partB} />
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Fee`} name={`${id}_Fee`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="Fee" onChange={this.handleChange.bind(this)}
-                       value={this.StateV[`${id}`].Fee} />
+                    <InputWithLabel id={`Processing_${id}_Fee_${(this.props.partB || "partA")}`} placeholder="Fee"
+                        title="Fee" min="0" partB={this.props.partB} />
                 </div>
             </div>
         );

@@ -103,7 +103,7 @@ class App extends Component {
                     <button type="button" onClick={this.reset.bind(this, "partB")} style={{marginRight: "10px"}}
                             className="btn btn-secondary"> Reset B
                     </button>
-                    <Excel value={this.props.State} />
+                    {/*<Excel value={this.props.State} />*/}
                 </div>
 
                 <br/>

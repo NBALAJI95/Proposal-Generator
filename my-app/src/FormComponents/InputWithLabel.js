@@ -68,8 +68,17 @@ class InputWithLabel extends Component {
 
         if(event.target.name.indexOf("_") >= 0) {
             name = event.target.name.split('_');
-            val = Object.assign({}, this.StateV[`${name[0]}`], {[name[1]]: val});
-            name = name[0];
+
+            if(name[0] === "AdditionalFees") {
+                val = Object.assign({}, this.StateV[`${name[0]}`], {[name[1]]: val});
+                name = "AdditionalFees";
+            }
+            else if (name[0] === "Processing") {
+                const pf = Object.assign({}, this.StateV[`ProcessingFees`][name[1]], { [name[2]]: val });
+                val = Object.assign({}, this.StateV[`ProcessingFees`], {[name[1]]: pf});
+                name = 'ProcessingFees';
+            }
+
             /*if(name === "AdditionalFees")
                 this.props.updateStateValue('Total', "Total", {TotalAdditionalFee: calculateTotalAdditionalFee(val)},
                     this.props.partB);*/
@@ -83,25 +92,50 @@ partB={this.props.typeVal}
 */
 
     renderInput() {
+        let name='';
         if(this.props.id.indexOf("_") >= 0) {
-            const name = this.props.id.split('_');
+            name = this.props.id.split('_');
             
             if(name[0] === 'AdditionalFees') {
                 return (
                     <input onFocus={this.focus.bind(this)} type={this.props.type || "number"}
-                       value={removeNaN(this.props.type || "number", this.StateV.AdditionalFees[name[1]])} className="form-control" id={`${this.props.id}_${(this.props.partB || 'partA')}`}
+                       value={removeNaN(this.props.type || "number", this.StateV.AdditionalFees[name[1]])}
+                       className="form-control" id={`${this.props.id}_${(this.props.partB || 'partA')}`}
                        name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
-                       required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min}/>
+                       required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min} />
+                );
+            }
+            else if (name[0] === 'Processing') {
+                return (
+                    <input onFocus={this.focus.bind(this)} type={this.props.type || "number"} min={this.props.min}
+                       value={removeNaN(this.props.type || "number", this.StateV.ProcessingFees[name[1]][name[2]])}
+                       className="form-control" name={this.props.id} title={this.props.title} id={`${this.props.id}`}
+                       placeholder={this.props.placeholder} required={this.props.required}
+                       onChange={this.handleChange.bind(this)} />
                 );
             }
         }
         else {
             return (
                 <input onFocus={this.focus.bind(this)} type={this.props.type || "number"}
-                       value={removeNaN(this.props.type || "number", this.StateV[this.props.id])} className="form-control" id={`${this.props.id}_${(this.props.partB || 'partA')}`}
-                       name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
-                       required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min}/>
+                   value={removeNaN(this.props.type || "number", this.StateV[this.props.id])}
+                   className="form-control" id={`${this.props.id}_${(this.props.partB || 'partA')}`}
+                   name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
+                   required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min}/>
             );
+        }
+    }
+
+    renderLabel(label) {
+        if(label) {
+            return (
+                <strong>
+                    <label htmlFor={`${this.props.id}_${(this.props.partB || 'partA')}`} style={{marginTop: '0.5rem'}}>
+                        {this.props.label}
+                        {InputWithLabel.requiredLabel(this.props.required)}
+                    </label>
+                </strong>
+                );
         }
     }
 
@@ -111,12 +145,7 @@ partB={this.props.typeVal}
 
         return (
             <div>
-                <strong>
-                    <label htmlFor={`${this.props.id}_${(this.props.partB || 'partA')}`} style={{marginTop: '0.5rem'}}>
-                        {this.props.label}
-                        {InputWithLabel.requiredLabel(this.props.required)}
-                    </label>
-                </strong>
+                {this.renderLabel(this.props.label)}
 
                 <div>
                     {this.renderInput()}

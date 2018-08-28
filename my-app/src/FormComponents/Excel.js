@@ -79,6 +79,22 @@ const additionalFees = ({ AdditionalFees, Total }, valueB) => {
     return returnVal;
 };
 
+const cardInput = (label, property, value, valueB) => {
+    return ([{value: label},
+        {value: currency(value[property].Volume) },
+        {value: `${value[property].Number}`},
+        {value: `${value[property].Percentage}`},
+        {value: currency(value[property].Item) },
+        {value: currency(value[property].Fee) },
+        {value: "" },
+        {value: currency(valueB[property].Volume) },
+        {value: `${valueB[property].Number}`},
+        {value: `${valueB[property].Percentage}`},
+        {value: currency(valueB[property].Item) },
+        {value: currency(valueB[property].Fee) },
+    ]);
+};
+
 const setValues = (value, valueB) => {
     multiDataSet = [
         {
@@ -103,14 +119,15 @@ const setValues = (value, valueB) => {
             ySteps: 0,
             columns: [],
             data: [
-                [{value: "CURRENT PROVIDER"},
+                [{value: "CURRENT PROVIDER", style: {font: {bold: true}}},
                 {value: ""},
                 {value: ""},
                 {value: ""},
-                {value: ""},
-                {value: ""},
-                {value: ""},
-                {value: "OUR QUOTE"},
+                {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+                {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+                {value: "OUR QUOTE", style: {font: {bold: true}, fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+                {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+                {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                 ],
             ]
         },
@@ -121,58 +138,10 @@ const setValues = (value, valueB) => {
         {
             columns: ["", "VOLUME", "#", "%", "ITEM", "FEE", "", "VOLUME", "#", "%", "ITEM", "FEE"],
             data: [
-                [{value: "Visa"},
-                    {value: currency(value.VISA.Volume) },
-                    {value: `${value.VISA.Number}`},
-                    {value: `${value.VISA.Percentage}`},
-                    {value: currency(value.VISA.Item) },
-                    {value: currency(value.VISA.Fee) },
-                    {value: "" },
-                    {value: currency(valueB.VISA.Volume) },
-                    {value: `${valueB.VISA.Number}`},
-                    {value: `${valueB.VISA.Percentage}`},
-                    {value: currency(valueB.VISA.Item) },
-                    {value: currency(valueB.VISA.Fee) },
-                ],
-                [{value: "Master Card"},
-                    {value: currency(value.Mastercard.Volume) },
-                    {value: `${value.Mastercard.Number}`},
-                    {value: `${value.Mastercard.Percentage}`},
-                    {value: currency(value.Mastercard.Item) },
-                    {value: currency(value.Mastercard.Fee) },
-                    {value: "" },
-                    {value: currency(valueB.Mastercard.Volume) },
-                    {value: `${valueB.Mastercard.Number}`},
-                    {value: `${valueB.Mastercard.Percentage}`},
-                    {value: currency(valueB.Mastercard.Item) },
-                    {value: currency(valueB.Mastercard.Fee) },
-                ],
-                [{value: "DISCOVER"},
-                    {value: currency(value.Discover.Volume) },
-                    {value: `${value.Discover.Number}`},
-                    {value: `${value.Discover.Percentage}`},
-                    {value: currency(value.Discover.Item)},
-                    {value: currency(value.Discover.Fee) },
-                    {value: "" },
-                    {value: currency(valueB.Discover.Volume) },
-                    {value: `${valueB.Discover.Number}`},
-                    {value: `${valueB.Discover.Percentage}`},
-                    {value: currency(valueB.Discover.Item)},
-                    {value: currency(valueB.Discover.Fee) },
-                ],
-                [{value: "AMEX"},
-                    {value: currency(value.AMEX.Volume) },
-                    {value: `${value.AMEX.Number}`},
-                    {value: `${value.AMEX.Percentage}`},
-                    {value: currency(value.AMEX.Item) },
-                    {value: currency(value.AMEX.Fee) },
-                    {value: "" },
-                    {value: currency(valueB.AMEX.Volume) },
-                    {value: `${valueB.AMEX.Number}`},
-                    {value: `${valueB.AMEX.Percentage}`},
-                    {value: currency(valueB.AMEX.Item) },
-                    {value: currency(valueB.AMEX.Fee) },
-                ],
+                cardInput("VISA", "VISA", value, valueB),
+                cardInput("Master Card", "Mastercard", value, valueB),
+                cardInput("Discover", "Discover", value, valueB),
+                cardInput("AMEX", "AMEX", value, valueB),
                 feeValue("TOTAL", currency(`${value.VISA.Fee + value.Mastercard.Fee + value.Discover.Fee
                 + value.AMEX.Fee}`), currency(`${valueB.VISA.Fee + valueB.Mastercard.Fee + valueB.Discover.Fee
                 + valueB.AMEX.Fee}`))
@@ -336,11 +305,13 @@ const Excel = (props) => {
     return (
     <div style={{display: 'inline-block'}}>
         <ExcelFile element={<input type="submit" className="btn btn-primary"
-           disabled={enableCondition(values) && enableCondition(valuesB)}  value="Submit" />}>
+             value="Submit" />}>
             <ExcelSheet dataSet={multiDataSet} name="Organization"/>
         </ExcelFile>
     </div>);
 };
+
+// disabled={enableCondition(values) && enableCondition(valuesB)}
 
 export default Excel;
 

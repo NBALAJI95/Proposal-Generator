@@ -10,7 +10,7 @@ const ValueOf = (val) => (
 
 class ProcessingFee extends Component {
     calculateProcessingFee() {
-        const array_val = ['VISA', 'Mastercard', 'Discover', 'AMEX'];
+        /*const array_val = ['VISA', 'Mastercard', 'Discover', 'AMEX'];
 
         let total = 0;
 
@@ -20,7 +20,7 @@ class ProcessingFee extends Component {
 
         total = ValueOf(total.toFixed(2));
 
-        return total;
+        return total;*/
     }
     
     render() {
@@ -75,7 +75,7 @@ class ProcessingFee extends Component {
                     <CardInput id="AMEX" partB={this.props.typeVal} label={"AMEX"} />
                 </div>
 
-                <Total label="processing fees" value={`$ ${this.calculateProcessingFee()}`} />
+                <Total label="processing fees" value={`$ ${this.StateV.Total.TotalProcessingFees}`} />
             </div>
         );
     }
