@@ -70,7 +70,6 @@ class App extends Component {
                 <AdditionalFee />
 
                 <div style={{float: "right"}} className="form-group">
-                    {/*<Excel value={this.props.State} />*/}
                     <button type="button" onClick={this.reset.bind(this, "partA")} style={{marginLeft: "10px"}}
                             className="btn btn-secondary"> Reset A
                     </button>
@@ -93,17 +92,20 @@ class App extends Component {
 
                 <Total label="Monthly Savings" value={currency((partA.Total.Total_Fee) - (partB.Total.Total_Fee))} />
 
-                <Total label="Savings %" value={withoutCurrency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee)) / (partA.Total.Total_Fee) * 100)+"%"} />
+                <Total label="Savings %" value={withoutCurrency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee))
+                    / (partA.Total.Total_Fee) * 100)+"%"} />
 
-                <Total label="1 Year Savings" value={currency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee)) * 12 )} />
+                <Total label="1 Year Savings" value={currency(((partA.Total.Total_Fee)
+                    - (partB.Total.Total_Fee)) * 12 )} />
 
-                <Total label="3 Years Savings" value={currency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee)) * 12 * 3 )} />
+                <Total label="3 Years Savings" value={currency(((partA.Total.Total_Fee)
+                    - (partB.Total.Total_Fee)) * 12 * 3 )} />
 
                 <div style={{float: "right"}} className="form-group">
                     <button type="button" onClick={this.reset.bind(this, "partB")} style={{marginRight: "10px"}}
                             className="btn btn-secondary"> Reset B
                     </button>
-                    {/*<Excel value={this.props.State} />*/}
+                    <Excel value={this.props.State} />
                 </div>
 
                 <br/>

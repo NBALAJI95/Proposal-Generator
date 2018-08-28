@@ -4,27 +4,10 @@ import Heading from './Heading.js';
 import Total from './Total.js';
 import {connect} from "react-redux";
 
-const ValueOf = (val) => (
-    parseFloat(val) || 0
-);
-
 class ProcessingFee extends Component {
-    calculateProcessingFee() {
-        /*const array_val = ['VISA', 'Mastercard', 'Discover', 'AMEX'];
-
-        let total = 0;
-
-        array_val.forEach((val) => {
-            total += ValueOf(this.StateV[val].Fee);
-        });
-
-        total = ValueOf(total.toFixed(2));
-
-        return total;*/
-    }
-    
     render() {
         const { partA, partB } = this.props.State;
+        const { typeVal } = this.props;
         this.StateV = (this.props.typeVal) ? partB : partA;
 
         return (
@@ -60,19 +43,19 @@ class ProcessingFee extends Component {
                 <hr/>
 
                 <div className="form-group">
-                    <CardInput id="VISA" partB={this.props.typeVal} label={"VISA"} />
+                    <CardInput id="VISA" partB={typeVal} label={"VISA"} />
                 </div>
 
                 <div className="form-group">
-                    <CardInput id="Mastercard" partB={this.props.typeVal} label={"Mastercard"} />
+                    <CardInput id="Mastercard" partB={typeVal} label={"Mastercard"} />
                 </div>
 
                 <div className="form-group">
-                    <CardInput id="Discover" partB={this.props.typeVal} label={"Discover"} />
+                    <CardInput id="Discover" partB={typeVal} label={"Discover"} />
                 </div>
 
                 <div className="form-group">
-                    <CardInput id="AMEX" partB={this.props.typeVal} label={"AMEX"} />
+                    <CardInput id="AMEX" partB={typeVal} label={"AMEX"} />
                 </div>
 
                 <Total label="processing fees" value={`$ ${this.StateV.Total.TotalProcessingFees}`} />

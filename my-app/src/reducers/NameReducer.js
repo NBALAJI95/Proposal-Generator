@@ -24,9 +24,8 @@ const INITIAL_STATE_A = () => ({
 });
 
 const GET_PART_A = (state) => {
-    const ret =  {partB: Object.assign({}, state.partA, state.partA.VISA, state.partA.Mastercard, state.partA.Discover,
+    return {partB: Object.assign({}, state.partA, state.partA.VISA, state.partA.Mastercard, state.partA.Discover,
         state.partA.AMEX)};
-    return ret;
 };
 
 const INITIAL_STATE = () => (
@@ -56,9 +55,10 @@ const calculateTotal = (State, part) => {
     });
 
     array_val.forEach((val) => {
-        State[part].ProcessingFees[val].Fee = ValueOf(State[part].ProcessingFees[val].Volume *
-        (State[part].ProcessingFees[val].Percentage/100)) + ValueOf((State[part].ProcessingFees[val].Number  *
-        State[part].ProcessingFees[val].Item).toFixed(2));
+        const eachFee = ValueOf(State[part].ProcessingFees[val].Volume *
+            (State[part].ProcessingFees[val].Percentage/100)) + ValueOf((State[part].ProcessingFees[val].Number  *
+            State[part].ProcessingFees[val].Item));
+        State[part].ProcessingFees[val].Fee = (eachFee > 0) ? eachFee.toFixed(2) : " ";
     });
 
     let processTotal = 0;
@@ -75,10 +75,6 @@ const calculateTotal = (State, part) => {
             TotalProcessingFees: processTotal}});
     return Object.assign({}, State, {[part]: step1});
 };
-
-/*const calculate = () => {
-    CalculateTotal();
-};*/
 
 export default (state = INITIAL_STATE(), action) => {
 

@@ -110,9 +110,8 @@ class AdditionalFee extends Component {
 
     render() {
         const { partA, partB } = this.props.State;
+        const { typeVal } = this.props;
         this.StateV = (this.props.typeVal) ? partB : partA;
-
-        // const { State } = this.props;
 
         return (
             <div>
@@ -122,34 +121,34 @@ class AdditionalFee extends Component {
                     <div className="row">
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_monthlyFee" label="Monthly Fees" placeholder="Amount (USD)"
-                                title="Monthly Fees" min="0" partB={this.props.typeVal} />
+                                title="Monthly Fees" min="0" partB={typeVal} />
                         </div>
 
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_regulatoryFee" label="Regulatory Fees" placeholder="Amount (USD)"
-                                title="Regulatory Fees" min="0" partB={this.props.typeVal} />
+                                title="Regulatory Fees" min="0" partB={typeVal} />
                         </div>
 
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_pciFee" label="PCI Compliance Fees" placeholder="Amount (USD)"
-                                title="PCI Compliance Fees" min="0" partB={this.props.typeVal} />
+                                title="PCI Compliance Fees" min="0" partB={typeVal} />
                         </div>
                     </div>
 
                     <div className="row">
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_techFee" label="Tech Fees" placeholder="Amount (USD)"
-                                title="Tech Fees" min="0" partB={this.props.typeVal} />
+                                title="Tech Fees" min="0" partB={typeVal} />
                         </div>
 
                         <div className="col-sm-4">
-                            <InputWithLabel id="AdditionalFees_pos" label="POS Fees" placeholder="Amount (USD)" title="POS Fees"
-                                min="0" partB={this.props.typeVal} />
+                            <InputWithLabel id="AdditionalFees_pos" label="POS Fees" placeholder="Amount (USD)"
+                                title="POS Fees" min="0" partB={typeVal} />
                         </div>
 
                         <div className="col-sm-4">
-                            <InputWithLabel id="AdditionalFees_misc" label="Misc Fees" placeholder="Amount (USD)" title="Misc Fees"
-                                min="0" partB={this.props.typeVal} />
+                            <InputWithLabel id="AdditionalFees_misc" label="Misc Fees" placeholder="Amount (USD)"
+                                title="Misc Fees" min="0" partB={typeVal} />
                         </div>
 
                     </div>

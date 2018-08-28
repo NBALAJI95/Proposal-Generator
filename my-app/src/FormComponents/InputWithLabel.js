@@ -30,15 +30,6 @@ const ValueOf = (val) => (
     parseFloat(val) || 0
 );
 
-/*const calculateTotalAdditionalFee = (AdditionalFee) => {
-    let total = 0;
-
-    Object.values(AdditionalFee).forEach((item, key) => {
-        total += ValueOf(item);
-    });
-    return total;
-};*/
-
 const removeNaN = (type, val) => {
     if(type === "number") {
         return (ValueOf(val) === 0) ? '' : val;
@@ -78,50 +69,39 @@ class InputWithLabel extends Component {
                 val = Object.assign({}, this.StateV[`ProcessingFees`], {[name[1]]: pf});
                 name = 'ProcessingFees';
             }
-
-            /*if(name === "AdditionalFees")
-                this.props.updateStateValue('Total', "Total", {TotalAdditionalFee: calculateTotalAdditionalFee(val)},
-                    this.props.partB);*/
         }
 
         this.props.updateStateValue('InputWithLabel', name, val, (this.props.partB || 'partA'));
     }
 
-/*
-partB={this.props.typeVal}
-*/
-
     renderInput() {
         let name='';
-        if(this.props.id.indexOf("_") >= 0) {
-            name = this.props.id.split('_');
+        const { id, type, partB, title, placeholder, required, min } = this.props;
+        if(id.indexOf("_") >= 0) {
+            name = id.split('_');
             
             if(name[0] === 'AdditionalFees') {
                 return (
-                    <input onFocus={this.focus.bind(this)} type={this.props.type || "number"}
-                       value={removeNaN(this.props.type || "number", this.StateV.AdditionalFees[name[1]])}
-                       className="form-control" id={`${this.props.id}_${(this.props.partB || 'partA')}`}
-                       name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
-                       required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min} />
+                    <input onFocus={this.focus.bind(this)} type={type || "number"} className="form-control"
+                       value={removeNaN(type || "number", this.StateV.AdditionalFees[name[1]])}
+                       id={`${id}_${(partB || 'partA')}`} name={id} title={title} placeholder={placeholder}
+                       required={required} onChange={this.handleChange.bind(this)} min={min} />
                 );
             }
             else if (name[0] === 'Processing') {
                 return (
-                    <input onFocus={this.focus.bind(this)} type={this.props.type || "number"} min={this.props.min}
-                       value={removeNaN(this.props.type || "number", this.StateV.ProcessingFees[name[1]][name[2]])}
-                       className="form-control" name={this.props.id} title={this.props.title} id={`${this.props.id}`}
-                       placeholder={this.props.placeholder} required={this.props.required}
+                    <input onFocus={this.focus.bind(this)} type={type || "number"} min={min} className="form-control"
+                       value={removeNaN(type || "number", this.StateV.ProcessingFees[name[1]][name[2]])}
+                       name={id} title={title} id={`${id}`} placeholder={placeholder} required={required}
                        onChange={this.handleChange.bind(this)} />
                 );
             }
         }
         else {
             return (
-                <input onFocus={this.focus.bind(this)} type={this.props.type || "number"}
-                   value={removeNaN(this.props.type || "number", this.StateV[this.props.id])}
-                   className="form-control" id={`${this.props.id}_${(this.props.partB || 'partA')}`}
-                   name={this.props.id} title={this.props.title} placeholder={this.props.placeholder}
-                   required={this.props.required} onChange={this.handleChange.bind(this)} min={this.props.min}/>
+                <input onFocus={this.focus.bind(this)} type={type || "number"} className="form-control" min={min}
+                   value={removeNaN(type || "number", this.StateV[id])} id={`${id}_${(partB || 'partA')}`} name={id}
+                   title={title} placeholder={placeholder} required={required} onChange={this.handleChange.bind(this)} />
             );
         }
     }

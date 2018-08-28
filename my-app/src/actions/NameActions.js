@@ -1,4 +1,3 @@
-
 export const updateStateValue = (type, name, val, part) => (
     {
         type, name, val, part
