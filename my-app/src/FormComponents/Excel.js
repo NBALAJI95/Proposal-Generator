@@ -5,22 +5,12 @@ const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 let multiDataSet=[];
 
-const withoutCurrency = (val) => {
-    const v = `${parseFloat(val).toLocaleString('en-US',
-        {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
-    if(v !== '$ NaN')
-        return v;
+const currency = (val, cond) => {
+    if(cond)
+        val = `$ ${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
     else
-        return ' ';
-};
-
-const currency = (val) => {
-    const v = `$ ${parseFloat(val).toLocaleString('en-US',
-        {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
-    if(v !== '$ NaN')
-        return v;
-    else
-        return ' ';
+        val = `${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
+    return (val !== '$ NaN') ? val : ' ';
 };
 
 const redundantObject = (obj, count) => {
@@ -57,11 +47,11 @@ const additionalFees = ({ AdditionalFees, Total }, valueB) => {
     };
 
     Object.keys(AdditionalFees).forEach((item, key) => {
-        returnVal.push( feeValue( (mapValues[item] || item), currency(AdditionalFees[`${item}`]),
-            currency(AdditionalFeesB[`${item}`]) ) );
+        returnVal.push( feeValue( (mapValues[item] || item), currency(AdditionalFees[`${item}`], true),
+            currency(AdditionalFeesB[`${item}`], true) ) );
     });
 
-    returnVal.push(feeValue("TOTAL", currency(Total.TotalAdditionalFee), currency(TotalB.TotalAdditionalFee)));
+    returnVal.push(feeValue("TOTAL", currency(Total.TotalAdditionalFee, true), currency(TotalB.TotalAdditionalFee), true));
 
     return returnVal;
 };
@@ -73,11 +63,11 @@ const cardInput = (label, property, value, valueB) => {
         Percentage: PercentageB, Item: ItemB, Fee: FeeB } = valueB.ProcessingFees[property];
 
     return ([{value: label},
-        {value: currency(VolumeA) }, {value: `${NumberA}`}, {value: `${PercentageA}`},
-        {value: currency(ItemA) }, {value: currency(FeeA) },
+        {value: currency(VolumeA, true)}, {value: `${NumberA}`}, {value: `${PercentageA}`},
+        {value: currency(ItemA, true)}, {value: currency(FeeA, true)},
         {value: "" },
-        {value: currency(VolumeB) }, {value: `${NumberB}`}, {value: `${PercentageB}`},
-        {value: currency(ItemB) }, {value: currency(FeeB) },
+        {value: currency(VolumeB, true)}, {value: `${NumberB}`}, {value: `${PercentageB}`},
+        {value: currency(ItemB, true)}, {value: currency(FeeB, true)},
     ]);
 };
 
@@ -102,13 +92,13 @@ const setValues = (value, valueB) => {
             columns: [`${value.businessName}`, "", "", "", "", ],
             data: [
                 [
-                    {value: "TOTAL VOLUME"}, {value: currency(value.volume)},
+                    {value: "TOTAL VOLUME"}, {value: currency(value.volume, true)},
                 ],
                 [
                     {value: "TOTAL TRANSACTIONS"}, {value: `${value.transactions}`},
                 ],
                 [
-                    {value: "AVG. TICKET"}, {value: currency(value.ticket) },
+                    {value: "AVG. TICKET"}, {value: currency(value.ticket, true) },
                 ],
                 [
                     {value: "PROVIDER"}, {value: `${value.currentProvider}`},
@@ -137,7 +127,8 @@ const setValues = (value, valueB) => {
             data: [
                 cardInput("VISA", "VISA", value, valueB), cardInput("Master Card", "Mastercard", value, valueB),
                 cardInput("Discover", "Discover", value, valueB), cardInput("AMEX", "AMEX", value, valueB),
-                feeValue("TOTAL", currency(value.Total.TotalProcessingFees), currency(valueB.Total.TotalProcessingFees))
+                feeValue("TOTAL", currency(value.Total.TotalProcessingFees, true),
+                currency(valueB.Total.TotalProcessingFees, true))
             ]
         },
         {
@@ -149,11 +140,11 @@ const setValues = (value, valueB) => {
             data: [
                 [{value: "AMEX"},
                     ...redundantObject({value: ""}, 4),
-                    {value: currency(value.amexFee)},
+                    {value: currency(value.amexFee, true)},
                     ...redundantObject({value: ""}, 4),
-                    {value: currency(valueB.amexFee)},
+                    {value: currency(valueB.amexFee, true)},
                 ],
-                feeValue("TOTAL", currency(value.assoFee), currency(valueB.assoFee))
+                feeValue("TOTAL", currency(value.assoFee, true), currency(valueB.assoFee, true))
             ]
         },
         {
@@ -163,7 +154,7 @@ const setValues = (value, valueB) => {
         {
             columns: [],
             data: [
-                feeValue("TOTAL", currency(value.authFee), currency(valueB.authFee))
+                feeValue("TOTAL", currency(value.authFee, true), currency(valueB.authFee, true))
             ]
         },
         {
@@ -179,8 +170,8 @@ const setValues = (value, valueB) => {
             ySteps: 1,
             columns: [],
             data: [
-                TotalFee_AND_ER("TOTAL FEES", (currency(value.Total.Total_Fee) || 0),
-                    (currency(valueB.Total.Total_Fee) || 0))
+                TotalFee_AND_ER("TOTAL FEES", (currency(value.Total.Total_Fee, true) || 0),
+                    (currency(valueB.Total.Total_Fee, true) || 0))
             ]
         },
         {
@@ -197,7 +188,7 @@ const setValues = (value, valueB) => {
             columns: [],
             data: [
                 [{value: "MONTHLY SAVINGS", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                    {value: `${currency(value.Total.Total_Fee - valueB.Total.Total_Fee)}`,
+                    {value: `${currency(value.Total.Total_Fee - valueB.Total.Total_Fee, true)}`,
                         style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
                 ],
             ]
@@ -205,20 +196,20 @@ const setValues = (value, valueB) => {
         {
             columns: [],
             data: [
-                renderSavings("SAVINGS %", `${withoutCurrency((value.Total.Total_Fee - valueB.Total.Total_Fee) 
-                    / (value.Total.Total_Fee) * 100)}%`)
+                renderSavings("SAVINGS %", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) 
+                    / (value.Total.Total_Fee) * 100, false)}%`)
             ]
         },
         {
             columns: [],
             data: [
-                renderSavings("1 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12)}`)
+                renderSavings("1 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12, true)}`)
             ]
         },
         {
             columns: [],
             data: [
-                renderSavings("3 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12 * 3)}`)
+                renderSavings("3 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12 * 3, true)}`)
             ]
         }
     ];

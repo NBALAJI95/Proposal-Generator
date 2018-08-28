@@ -10,29 +10,18 @@ import Excel from './FormComponents/Excel.js';
 import {connect} from "react-redux";
 import {resetForm, fetchForm} from "./actions";
 
-const withoutCurrency = (val) => {
-    const v = `${parseFloat(val).toLocaleString('en-US',
-        {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
-    if(v !== '$ NaN')
-        return v;
+const currency = (val, cond) => {
+    if(cond)
+        val = `$ ${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
     else
-        return ' ';
-};
-
-const currency = (val) => {
-    const v = `$ ${parseFloat(val).toLocaleString('en-US',
-        {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
-    if(v !== '$ NaN')
-        return v;
-    else
-        return ' ';
+        val = `${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
+    return (val !== '$ NaN') ? val : ' ';
 };
 
 class App extends Component {
 
   reset(part) {
-      this.props.resetForm(part);
-      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      this.props.resetForm(part); document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
   fetchToPartB() {
@@ -46,8 +35,6 @@ class App extends Component {
   }
 
   render() {
-    console.log("Props in app", this.props);
-
     const { partA, partB } = this.props.State;
 
     return (
@@ -90,20 +77,20 @@ class App extends Component {
 
                 <AdditionalFee typeVal="partB" />
 
-                <Total label="Monthly Savings" value={currency((partA.Total.Total_Fee) - (partB.Total.Total_Fee))} />
+                <Total label="Monthly Savings" value={currency((partA.Total.Total_Fee) - (partB.Total.Total_Fee), true)} />
 
-                <Total label="Savings %" value={withoutCurrency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee))
-                    / (partA.Total.Total_Fee) * 100)+"%"} />
+                <Total label="Savings %" value={currency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee))
+                    / (partA.Total.Total_Fee) * 100, false)+"%"} />
 
                 <Total label="1 Year Savings" value={currency(((partA.Total.Total_Fee)
-                    - (partB.Total.Total_Fee)) * 12 )} />
+                    - (partB.Total.Total_Fee)) * 12, true)} />
 
                 <Total label="3 Years Savings" value={currency(((partA.Total.Total_Fee)
-                    - (partB.Total.Total_Fee)) * 12 * 3 )} />
+                    - (partB.Total.Total_Fee)) * 12 * 3, true )} />
 
                 <div style={{float: "right"}} className="form-group">
                     <button type="button" onClick={this.reset.bind(this, "partB")} style={{marginRight: "10px"}}
-                            className="btn btn-secondary"> Reset B
+                        className="btn btn-secondary"> Reset B
                     </button>
                     <Excel value={this.props.State} />
                 </div>

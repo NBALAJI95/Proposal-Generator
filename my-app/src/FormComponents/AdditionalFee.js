@@ -10,12 +10,8 @@ const ValueOf = (val) => (
 );
 
 const currency = (val) => {
-    const v = `$ ${parseFloat(val).toLocaleString('en-US',
-        {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
-    if(v !== '$ NaN')
-        return v;
-    else
-        return ' ';
+    val = `$ ${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
+    return (val !== '$ NaN') ? val : ' ';
 };
 
 class AdditionalFee extends Component {
