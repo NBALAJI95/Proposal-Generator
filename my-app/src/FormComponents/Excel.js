@@ -91,18 +91,10 @@ const setValues = (value, valueB) => {
         {
             columns: [`${value.businessName}`, "", "", "", "", ],
             data: [
-                [
-                    {value: "TOTAL VOLUME"}, {value: currency(value.volume, true)},
-                ],
-                [
-                    {value: "TOTAL TRANSACTIONS"}, {value: `${value.transactions}`},
-                ],
-                [
-                    {value: "AVG. TICKET"}, {value: currency(value.ticket, true) },
-                ],
-                [
-                    {value: "PROVIDER"}, {value: `${value.currentProvider}`},
-                ]
+                [ {value: "TOTAL VOLUME"}, {value: currency(value.volume, true)} ],
+                [ {value: "TOTAL TRANSACTIONS"}, {value: `${value.transactions}`} ],
+                [ {value: "AVG. TICKET"}, {value: currency(value.ticket, true) } ],
+                [ {value: "PROVIDER"}, {value: `${value.currentProvider}`} ]
             ]
         },
         {
@@ -139,10 +131,8 @@ const setValues = (value, valueB) => {
             columns: [],
             data: [
                 [{value: "AMEX"},
-                    ...redundantObject({value: ""}, 4),
-                    {value: currency(value.amexFee, true)},
-                    ...redundantObject({value: ""}, 4),
-                    {value: currency(valueB.amexFee, true)},
+                    ...redundantObject({value: ""}, 4), {value: currency(value.amexFee, true)},
+                    ...redundantObject({value: ""}, 4), {value: currency(valueB.amexFee, true)},
                 ],
                 feeValue("TOTAL", currency(value.assoFee, true), currency(valueB.assoFee, true))
             ]

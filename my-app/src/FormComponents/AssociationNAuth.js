@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import InputWithLabel from './InputWithLabel.js';
 import Heading from './Heading.js';
 import {toggleCheck} from "../actions";
+import { FormGroup, Label, Input } from 'reactstrap';
 
 class AssociationNAuth extends Component {
 
@@ -16,8 +17,8 @@ class AssociationNAuth extends Component {
         if(check) {
             return (
                 <div>
-                    <InputWithLabel id="amexFee" label="AMEX Fees" partB={typeVal}  placeholder="Amount (USD)"
-                        title="AMEX Fees" min="0" required />
+                    <InputWithLabel id="amexFee" label="AMEX Fees" partB={typeVal}  placeholder="Amount (USD)" min="0"
+                        title="AMEX Fees" required />
                 </div>
             );
         }
@@ -33,19 +34,19 @@ class AssociationNAuth extends Component {
             <div>
                 <Heading headingText={"Association & Auth"} />
 
-                <div className="form-group">
+                <FormGroup>
                     <div className="row">
                         <div className="col-sm-6">
                             <InputWithLabel id="assoFee" partB={typeVal} label="Association Fees" placeholder="Amount (USD)"
                                 title="Association Fees" min="0" required />
 
                             <div style={{paddingTop: "0.5rem"}} className="form-group">
-                                <input id={`amex_${(typeVal) || "partA"}`} checked={amexCheck}
-                                   onChange={this.checkChange.bind(this)} type="checkbox" aria-label="Checkbox for AMEX" />
-
-                                <label style={{paddingLeft: "7px"}} htmlFor={`amex_${(typeVal) || "partA"}`}>
-                                    Specify Amex Value
-                                </label>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" checked={amexCheck}
+                                            onChange={this.checkChange.bind(this)} />{' '} Specify Amex Value
+                                    </Label>
+                                </FormGroup>
 
                                 {this.renderCheck(typeVal)}
 
@@ -61,15 +62,12 @@ class AssociationNAuth extends Component {
                                 title="Other Auth fees" min="0" required />
                         </div>
                     </div>
-
-                </div>
+                </FormGroup>
             </div>
         );
     }
 }
 
-const mapStateToProps = (stateV) => {
-    return (stateV);
-};
+const mapStateToProps = (stateV) => (stateV);
 
 export default connect(mapStateToProps, {toggleCheck})(AssociationNAuth);

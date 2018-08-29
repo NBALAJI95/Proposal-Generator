@@ -4,6 +4,7 @@ import Heading from './Heading.js';
 import Total from './Total.js';
 import {connect} from "react-redux";
 import {updateStateValue} from "../actions";
+import { FormGroup } from 'reactstrap';
 
 const ValueOf = (val) => (
     parseFloat(val) || 0
@@ -113,7 +114,7 @@ class AdditionalFee extends Component {
             <div>
                 <Heading headingText={"Additional Fees"} required />
 
-                <div className="form-group">
+                <FormGroup>
                     <div className="row">
                         <div className="col-sm-4">
                             <InputWithLabel id="AdditionalFees_monthlyFee" label="Monthly Fees" placeholder="Amount (USD)"
@@ -159,7 +160,7 @@ class AdditionalFee extends Component {
 
                     <hr/>
 
-                    <Total label="Fees" value={`$ ${this.StateV.Total.Total_Fee}`} />
+                    <Total label="Fees" value={currency(this.StateV.Total.Total_Fee)} />
 
                     <Total label="Effective Rate"
                        value={(ValueOf(( (this.StateV.Total.Total_Fee / ValueOf(this.StateV.volume)) * 100).toFixed(2))
@@ -167,7 +168,7 @@ class AdditionalFee extends Component {
 
                     <hr/>
 
-                </div>
+                </FormGroup>
             </div>
         );
     }

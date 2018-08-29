@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {connect} from "react-redux";
+import { Button, Form } from 'reactstrap';
+
 import logo from './logo.svg';
 import './App.css';
 import BusinessInfo from './FormComponents/BusinessInfo.js';
@@ -7,7 +10,6 @@ import AdditionalFee from './FormComponents/AdditionalFee.js';
 import AssociationNAuth from './FormComponents/AssociationNAuth.js';
 import Total from './FormComponents/Total.js';
 import Excel from './FormComponents/Excel.js';
-import {connect} from "react-redux";
 import {resetForm, fetchForm} from "./actions";
 
 const currency = (val, cond) => {
@@ -46,7 +48,7 @@ class App extends Component {
         </header>
 
         <div className="container-fluid">
-            <form onSubmit={this.handleSubmit.bind(this)} className="Form-Container">
+            <Form onSubmit={this.handleSubmit.bind(this)} className="Form-Container">
 
                 <BusinessInfo />
 
@@ -57,12 +59,8 @@ class App extends Component {
                 <AdditionalFee />
 
                 <div style={{float: "right"}} className="form-group">
-                    <button type="button" onClick={this.reset.bind(this, "partA")} style={{marginLeft: "10px"}}
-                            className="btn btn-secondary"> Reset A
-                    </button>
-                    <button type="button" onClick={this.fetchToPartB.bind(this)} style={{marginLeft: "10px"}}
-                        className="btn btn-success"> FETCH TO PART B
-                    </button>
+                    <Button color="secondary" onClick={this.reset.bind(this, "partA")}> Reset A </Button> {' '}
+                    <Button color="success" onClick={this.fetchToPartB.bind(this)}> FETCH TO PART B </Button>
                 </div>
 
                 <br/><br/><br/>
@@ -89,15 +87,15 @@ class App extends Component {
                     - (partB.Total.Total_Fee)) * 12 * 3, true )} />
 
                 <div style={{float: "right"}} className="form-group">
-                    <button type="button" onClick={this.reset.bind(this, "partB")} style={{marginRight: "10px"}}
-                        className="btn btn-secondary"> Reset B
-                    </button>
+                    <Button color="secondary" onClick={this.reset.bind(this, "partB")}>
+                        Reset B
+                    </Button> {' '}
                     <Excel value={this.props.State} />
                 </div>
 
                 <br/>
 
-            </form>
+            </Form>
         </div>
       </div>
     );

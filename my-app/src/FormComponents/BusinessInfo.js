@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import InputWithLabel from './InputWithLabel.js';
 import Heading from './Heading.js';
+import { FormGroup } from 'reactstrap';
 
 class BusinessInfo extends Component {
 
@@ -10,7 +11,7 @@ class BusinessInfo extends Component {
             <div>
                 <Heading headingText={"Business Info."} />
 
-                <div className="form-group">
+                <FormGroup>
                     <div className="row">
                         <div className="col-sm-6">
                         <InputWithLabel id="businessName" partB={typeVal} type="text" label="Business Name" required
@@ -22,9 +23,9 @@ class BusinessInfo extends Component {
                                 placeholder="eg. Clover" title="Type your Current Provider" required />
                         </div>
                     </div>
-                </div>
+                </FormGroup>
 
-                <div className="form-group">
+                <FormGroup>
                     <div className="row">
                         <div className="col-sm-4">
                             <InputWithLabel id="volume" partB={typeVal} type="number" label="Volume" title="Total Volume"
@@ -41,7 +42,7 @@ class BusinessInfo extends Component {
                                 title="Total Transactions" min="0" required />
                         </div>
                     </div>
-                </div>
+                </FormGroup>
             </div>
         );
     }

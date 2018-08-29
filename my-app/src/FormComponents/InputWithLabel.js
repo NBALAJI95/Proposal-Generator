@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import {updateStateValue} from "../actions";
+import { Label, Input } from 'reactstrap';
 
 /*const commaFeature = (id) => {
     const tmp = parseFloat($(id).val()).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2});
@@ -75,47 +76,40 @@ class InputWithLabel extends Component {
     }
 
     renderInput() {
-        let name='';
+        let name = '';
         const { id, type, partB, title, placeholder, required, min } = this.props;
+        let Value;
+
         if(id.indexOf("_") >= 0) {
             name = id.split('_');
-            
             if(name[0] === 'AdditionalFees') {
-                return (
-                    <input onFocus={this.focus.bind(this)} type={type || "number"} className="form-control"
-                       value={removeNaN(type || "number", this.StateV.AdditionalFees[name[1]])}
-                       id={`${id}_${(partB || 'partA')}`} name={id} title={title} placeholder={placeholder}
-                       required={required} onChange={this.handleChange.bind(this)} min={min} />
-                );
+                Value = removeNaN(type || "number", this.StateV.AdditionalFees[name[1]]);
             }
             else if (name[0] === 'Processing') {
-                return (
-                    <input onFocus={this.focus.bind(this)} type={type || "number"} min={min} className="form-control"
-                       value={removeNaN(type || "number", this.StateV.ProcessingFees[name[1]][name[2]])}
-                       name={id} title={title} id={`${id}`} placeholder={placeholder} required={required}
-                       onChange={this.handleChange.bind(this)} />
-                );
+                Value = removeNaN(type || "number", this.StateV.ProcessingFees[name[1]][name[2]]);
             }
         }
         else {
-            return (
-                <input onFocus={this.focus.bind(this)} type={type || "number"} className="form-control" min={min}
-                   value={removeNaN(type || "number", this.StateV[id])} id={`${id}_${(partB || 'partA')}`} name={id}
-                   title={title} placeholder={placeholder} required={required} onChange={this.handleChange.bind(this)} />
-            );
+            Value = removeNaN(type || "number", this.StateV[id]);
         }
+
+        return (
+            <Input onFocus={this.focus.bind(this)} type={type || "number"} className="form-control"
+               value={Value} id={`${id}_${(partB || 'partA')}`} name={id} title={title} placeholder={placeholder}
+               required={required} onChange={this.handleChange.bind(this)} min={min} />
+        );
     }
 
     renderLabel(label) {
         if(label) {
             return (
                 <strong>
-                    <label htmlFor={`${this.props.id}_${(this.props.partB || 'partA')}`} style={{marginTop: '0.5rem'}}>
+                    <Label for={`${this.props.id}_${(this.props.partB || 'partA')}`} style={{marginTop: '0.5rem'}}>
                         {this.props.label}
                         {InputWithLabel.requiredLabel(this.props.required)}
-                    </label>
+                    </Label>
                 </strong>
-                );
+            );
         }
     }
 
