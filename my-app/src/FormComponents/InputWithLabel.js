@@ -31,14 +31,6 @@ const ValueOf = (val) => (
     parseFloat(val) || 0
 );
 
-const removeNaN = (type, val) => {
-    if(type === "number") {
-        return (ValueOf(val) === 0) ? '' : val;
-    }
-    else
-        return val;
-};
-
 class InputWithLabel extends Component {
     
     focus() {
@@ -83,14 +75,14 @@ class InputWithLabel extends Component {
         if(id.indexOf("_") >= 0) {
             name = id.split('_');
             if(name[0] === 'AdditionalFees') {
-                Value = removeNaN(type || "number", this.StateV.AdditionalFees[name[1]]);
+                Value = this.StateV.AdditionalFees[name[1]];
             }
             else if (name[0] === 'Processing') {
-                Value = removeNaN(type || "number", this.StateV.ProcessingFees[name[1]][name[2]]);
+                Value = this.StateV.ProcessingFees[name[1]][name[2]];
             }
         }
         else {
-            Value = removeNaN(type || "number", this.StateV[id]);
+            Value = this.StateV[id];
         }
 
         return (
@@ -129,8 +121,6 @@ class InputWithLabel extends Component {
     }
 }
 
-const mapStateToProps = (stateV) => {
-    return (stateV);
-};
+const mapStateToProps = (stateV) => (stateV);
 
 export default connect(mapStateToProps, {updateStateValue})(InputWithLabel);

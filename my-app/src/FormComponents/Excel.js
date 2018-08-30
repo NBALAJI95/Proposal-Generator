@@ -5,12 +5,12 @@ const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 let multiDataSet=[];
 
-const currency = (val, cond) => {
+const currency = (val, cond, special = false) => {
     if(cond)
         val = `$ ${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
     else
         val = `${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
-    return (val !== '$ NaN') ? val : ' ';
+    return (val !== '$ NaN') ? val : (special) ? '$ 0.00':' ';
 };
 
 const redundantObject = (obj, count) => {
@@ -21,15 +21,15 @@ const redundantObject = (obj, count) => {
     return ret;
 };
 
-const Heading = (headingValue) => {
-    return ([[{value: headingValue, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-        ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}, 11),
-    ],]);
+const Heading1 = (headingValue) => {
+    return ([{value: headingValue, style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+        ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}}, 10),
+    ]);
 };
 
-const feeValue = (label1, value1, value2) => {
-    return ([{value: label1},
-        ...redundantObject({value: ""}, 4), {value: value1}, ...redundantObject({value: ""}, 5), {value: value2}
+const feeValue = (label1, value1, value2, style={}) => {
+    return ([{value: label1, style},
+        ...redundantObject({value: ""}, 4), {value: value1, style}, ...redundantObject({value: ""}, 4), {value: value2, style}
     ]);
 };
 
@@ -51,7 +51,8 @@ const additionalFees = ({ AdditionalFees, Total }, valueB) => {
             currency(AdditionalFeesB[`${item}`], true) ) );
     });
 
-    returnVal.push(feeValue("TOTAL", currency(Total.TotalAdditionalFee, true), currency(TotalB.TotalAdditionalFee), true));
+    returnVal.push(feeValue("TOTAL", currency(Total.TotalAdditionalFee, true), currency(TotalB.TotalAdditionalFee, true),
+        {font: {bold: true}}));
 
     return returnVal;
 };
@@ -65,143 +66,106 @@ const cardInput = (label, property, value, valueB) => {
     return ([{value: label},
         {value: currency(VolumeA, true)}, {value: `${NumberA}`}, {value: `${PercentageA}`},
         {value: currency(ItemA, true)}, {value: currency(FeeA, true)},
-        {value: "" },
         {value: currency(VolumeB, true)}, {value: `${NumberB}`}, {value: `${PercentageB}`},
         {value: currency(ItemB, true)}, {value: currency(FeeB, true)},
     ]);
 };
 
 const TotalFee_AND_ER = (label, firstVal, secondVal) => ([
-    {value: label, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-    ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}, 4),
+    {value: label, style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+    ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}}, 4),
 
-    {value: firstVal, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-    ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}, 5),
+    {value: firstVal, style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+    ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}}, 4),
 
-    {value: secondVal, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+    {value: secondVal, style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
 ]);
 
 const renderSavings = (label, value) => ([
-    {value: label, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-    {value, style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+    {value: label, style: {font:{color: {rgb: "FFFFFF"},bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+    {value, style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
 ]);
 
 const setValues = (value, valueB) => {
     multiDataSet = [
         {
-            columns: [`${value.businessName}`, "", "", "", "", ],
+            columns: [],
             data: [
+                [ {value: `${value.businessName}`, style: { font:{color: {rgb: "FFFFFF"}, bold: true},
+                    fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}}, {value: ''} ],
                 [ {value: "TOTAL VOLUME"}, {value: currency(value.volume, true)} ],
                 [ {value: "TOTAL TRANSACTIONS"}, {value: `${value.transactions}`} ],
                 [ {value: "AVG. TICKET"}, {value: currency(value.ticket, true) } ],
-                [ {value: "PROVIDER"}, {value: `${value.currentProvider}`} ]
+                [ {value: "PROVIDER"}, {value: `${value.currentProvider}`} ],
+                [ {value: "DATE"}, {value: `${(new Date().getMonth() + 1)+"/"+(new Date().getDate())+
+                    "/"+new Date().getFullYear()}`} ]
             ]
         },
         {
-            xSteps: 2,
-            ySteps: 0,
             columns: [],
             data: [
-                [{value: "CURRENT PROVIDER", style: {font: {bold: true}}},
+                [{value: ""}, {value: ""}, {value: "CURRENT PROVIDER", style: {font: {bold: true}} },
                 ...redundantObject({value: ""}, 3),
-                ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}, 2),
-                {value: "OUR QUOTE", style: {font: {bold: true}, fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
-                ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}}, 2),
+                ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}}, 2),
+                {value: "OUR QUOTE", style: {font: {bold: true, color: {rgb: "FFFFFF"}}, fill: {patternType: "solid",
+                    fgColor: {rgb: "538DD5"}}}},
+                ...redundantObject({value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}}, 2),
                 ],
-            ]
-        },
-        {
-            columns: [],
-            data: Heading("PROCESSING FEES")
-        },
-        {
-            columns: ["", "VOLUME", "#", "%", "ITEM", "FEE", "", "VOLUME", "#", "%", "ITEM", "FEE"],
-            data: [
+
+                [{value: ""}, {value: "VOLUME", style: {font: {bold: true}}}, {value: "#", style: {font: {bold: true}}},
+                    {value: "%", style: {font: {bold: true}}}, {value: "ITEM", style: {font: {bold: true}}},
+                    {value: "FEE", style: {font: {bold: true}}},
+                    {value: "VOLUME", style: {font: {bold: true}}}, {value: "#", style: {font: {bold: true}}},
+                    {value: "%", style: {font: {bold: true}}}, {value: "ITEM", style: {font: {bold: true}}},
+                    {value: "FEE", style: {font: {bold: true}}}],
+
+                [...Heading1("PROCESSING FEES")],
                 cardInput("VISA", "VISA", value, valueB), cardInput("Master Card", "Mastercard", value, valueB),
                 cardInput("Discover", "Discover", value, valueB), cardInput("AMEX", "AMEX", value, valueB),
                 feeValue("TOTAL", currency(value.Total.TotalProcessingFees, true),
-                currency(valueB.Total.TotalProcessingFees, true))
-            ]
-        },
-        {
-            columns: [],
-            data: Heading("ASSOCIATION FEES")
-        },
-        {
-            columns: [],
-            data: [
+                    currency(valueB.Total.TotalProcessingFees, true), {font: {bold: true}}),
+
+                [], [...Heading1("ASSOCIATION FEES")],
                 [{value: "AMEX"},
                     ...redundantObject({value: ""}, 4), {value: currency(value.amexFee, true)},
                     ...redundantObject({value: ""}, 4), {value: currency(valueB.amexFee, true)},
                 ],
-                feeValue("TOTAL", currency(value.assoFee, true), currency(valueB.assoFee, true))
-            ]
-        },
-        {
-            columns: [],
-            data: Heading("OTHER AUTH FEES")
-        },
-        {
-            columns: [],
-            data: [
-                feeValue("TOTAL", currency(value.authFee, true), currency(valueB.authFee, true))
-            ]
-        },
-        {
-            columns: [],
-            data: Heading("ADDITIONAL FEES")
-        },
-        {
-            columns: [],
-            data: additionalFees(value, valueB)
-        },
-        {
-            xSteps: 0,
-            ySteps: 1,
-            columns: [],
-            data: [
-                TotalFee_AND_ER("TOTAL FEES", (currency(value.Total.Total_Fee, true) || 0),
-                    (currency(valueB.Total.Total_Fee, true) || 0))
-            ]
-        },
-        {
-            columns: [],
-            data: [
+                feeValue("TOTAL", currency(value.assoFee, true, true), currency(valueB.assoFee, true, true), {font: {bold: true}}),
+
+                [], [...Heading1("OTHER AUTH FEES")],
+                feeValue("TOTAL", currency(value.authFee, true, true), currency(valueB.authFee, true, true), {font: {bold: true}}),
+
+                [], [...Heading1("ADDITIONAL FEES")],
+                ...additionalFees(value, valueB),
+
+                [], TotalFee_AND_ER("TOTAL FEES", (currency(value.Total.Total_Fee, true) || 0),
+                    (currency(valueB.Total.Total_Fee, true) || 0)),
+
                 TotalFee_AND_ER("EFFECTIVE RATE",
                     `${parseFloat(((parseFloat(value.Total.Total_Fee) || 0)/
-                    (parseFloat(value.volume) || 0)*100)).toFixed(2)} %`,
+                        (parseFloat(value.volume) || 0)*100)).toFixed(2)} %`,
                     `${parseFloat(((parseFloat(valueB.Total.Total_Fee) || 0)/
-                    (parseFloat(valueB.volume) || 0)*100)).toFixed(2)} %`)
-            ]
-        },
-        {
-            columns: [],
-            data: [
-                [{value: "MONTHLY SAVINGS", style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+                        (parseFloat(valueB.volume) || 0)*100)).toFixed(2)} %`),
+
+                [], [{value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""},
+                    {value: "MONTHLY SAVINGS", style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
                     {value: `${currency(value.Total.Total_Fee - valueB.Total.Total_Fee, true)}`,
-                        style: {fill: {patternType: "solid", fgColor: {rgb: "0000FF"}}}},
+                        style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
                 ],
+
+                [{value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""},
+                    ...renderSavings("SAVINGS %", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee)
+                    / (value.Total.Total_Fee) * 100, false)}%`)],
+
+                [{value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""},
+                    ...renderSavings("1 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12, true)}`)],
+
+                [{value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""},
+                    ...renderSavings("3 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12 * 3, true)}`)]
             ]
         },
-        {
-            columns: [],
-            data: [
-                renderSavings("SAVINGS %", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) 
-                    / (value.Total.Total_Fee) * 100, false)}%`)
-            ]
-        },
-        {
-            columns: [],
-            data: [
-                renderSavings("1 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12, true)}`)
-            ]
-        },
-        {
-            columns: [],
-            data: [
-                renderSavings("3 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12 * 3, true)}`)
-            ]
-        }
     ];
 };
 
@@ -235,8 +199,7 @@ const Excel = (props) => {
 
     return (
     <div style={{display: 'inline-block'}}>
-        <ExcelFile element={<input type="submit" className="btn btn-primary" disabled={enableCondition(values)
-        && enableCondition(valuesB)} value="Submit" />}>
+        <ExcelFile element={<input type="submit" className="btn btn-primary" value="Submit" />}>
             <ExcelSheet dataSet={multiDataSet} name="Organization"/>
         </ExcelFile>
     </div>);
