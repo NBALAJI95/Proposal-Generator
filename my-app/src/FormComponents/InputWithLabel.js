@@ -27,13 +27,9 @@ const numberInput = (id) => {
     $(id).val(op);
 };*/
 
-const ValueOf = (val) => (
-    parseFloat(val) || 0
-);
-
 class InputWithLabel extends Component {
     
-    focus() {
+    focus(event) {
         // console.log("Focused");
     }
 
@@ -63,7 +59,6 @@ class InputWithLabel extends Component {
                 name = 'ProcessingFees';
             }
         }
-
         this.props.updateStateValue('InputWithLabel', name, val, (this.props.partB || 'partA'));
     }
 
@@ -88,7 +83,7 @@ class InputWithLabel extends Component {
         return (
             <Input onFocus={this.focus.bind(this)} type={type || "number"} className="form-control"
                value={Value} id={`${id}_${(partB || 'partA')}`} name={id} title={title} placeholder={placeholder}
-               required={required} onChange={this.handleChange.bind(this)} min={min} />
+               required={required} onChange={this.handleChange.bind(this)} min={min} step={(type)?"":"0.01"} />
         );
     }
 
