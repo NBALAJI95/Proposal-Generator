@@ -47,8 +47,16 @@ class App extends Component {
           <h1 className="App-title"> Proposal Generator </h1>
         </header>
 
+        <div style={fixed}>
+            <b>Current Effective rate: {(partA.Total.Total_Fee / partA.volume * 100) || '-'} %</b> <br/>
+            <b>New Effective rate: {(partB.Total.Total_Fee / partB.volume * 100) || '-'} %</b> <br/>
+            <b>Savings %: {((partA.Total.Total_Fee - partB.Total.Total_Fee)/(partA.Total.Total_Fee)*100 === 0) ? 0 :
+                ((partA.Total.Total_Fee - partB.Total.Total_Fee)/(partA.Total.Total_Fee)*100 || '-')} %</b>
+        </div>
+
         <div className="container-fluid">
             <Form onSubmit={this.handleSubmit.bind(this)} className="Form-Container">
+                <h2 className="text-center"> Current Statement </h2>
 
                 <BusinessInfo />
 
@@ -60,12 +68,13 @@ class App extends Component {
 
                 <div style={{float: "right"}} className="form-group">
                     <Button color="secondary" onClick={this.reset.bind(this, "partA")}> Reset A </Button> {' '}
-                    <Button color="success" onClick={this.fetchToPartB.bind(this)}> FETCH TO PART B </Button>
+                    <Button color="success" onClick={this.fetchToPartB.bind(this)}> COPY FORM </Button>
                 </div>
 
-                <br/><br/><br/>
+                <br/><br/>
+                <hr/>
 
-                <h2 className="text-center"> Part B </h2>
+                <h2 className="text-center"> Our Proposal </h2>
 
                 <BusinessInfo typeVal="partB" />
 
@@ -86,21 +95,26 @@ class App extends Component {
                 <Total label="3 Years Savings" value={currency(((partA.Total.Total_Fee)
                     - (partB.Total.Total_Fee)) * 12 * 3, true )} />
 
+                <hr/>
+
                 <div style={{float: "right"}} className="form-group">
                     <Button color="secondary" onClick={this.reset.bind(this, "partB")}>
                         Reset B
                     </Button> {' '}
                     <Excel value={this.props.State} />
                 </div>
-
                 <br/>
-
             </Form>
         </div>
       </div>
     );
   }
 }
+
+const fixed = {
+    position: "fixed", top: 0, right: 0, backgroundColor: "white",
+    zIndex: 100, border: "3px solid #73AD21", padding: "5px"
+};
 
 const mapStateToProps = (stateV) => {
     return (stateV);
