@@ -1,7 +1,12 @@
 import React from 'react';
 
-const Heading = (props) => (
-    <h2 style={styleHeading}> {props.headingText} </h2>
+const checkRequired = (cond) => {
+    if(cond)
+        return (<span style={{color: 'red'}}> *</span>);
+};
+
+const Heading = ({headingText, required}) => (
+    <h2 style={styleHeading}> {headingText} {checkRequired(required)} </h2>
 );
 
 const styleHeading = {

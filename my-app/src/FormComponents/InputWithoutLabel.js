@@ -1,48 +1,45 @@
 import React, { Component } from 'react';
+import {connect} from "react-redux";
+import {updateStateValue} from "../actions";
+import InputWithLabel from './InputWithLabel.js';
 
 class CardInput extends Component {
 
     render() {
-        const id = this.props.id;
+        const { id, label, partB } = this.props;
 
         return (
             <div className="row" style={{ marginTop: '1rem' }}>
                 <div className="col-sm-2">
-                    <strong> { this.props.label } </strong>
+                    <strong> { label } </strong>
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Volume`} name={`${id}_Volume`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="Volume" onChange={this.props.onChange}
-                       value={this.props.value.Volume} />
+                    <InputWithLabel id={`Processing_${id}_Volume`} placeholder="$" title="Volume" min="0" partB={partB} />
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Number`} name={`${id}_Number`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="#" onChange={this.props.onChange}
-                       value={this.props.value.Number} />
+                    <InputWithLabel id={`Processing_${id}_Number`} placeholder="#" title="#" min="0" partB={partB} />
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Percentage`} name={`${id}_Percentage`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="%" onChange={this.props.onChange}
-                       value={this.props.value.Percentage} />
+                    <InputWithLabel id={`Processing_${id}_Percentage`} placeholder="%" title="%" min="0" partB={partB} />
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Item`} name={`${id}_Item`} className="form-control" min="0" type="number"
-                       style={{width: '100%'}} placeholder="Item" onChange={this.props.onChange}
-                       value={this.props.value.Item} />
+                    <InputWithLabel id={`Processing_${id}_Item`} placeholder="%" title="%" min="0" partB={partB} />
                 </div>
 
                 <div className="col-sm-2">
-                    <input id={`${id}_Fee`} name={`${id}_Fee`} className="form-control" min="0" type="text"
-                       style={{width: '100%'}} placeholder="Fee" onChange={this.props.onChange}
-                       value={this.props.value.Fee} />
+                    <InputWithLabel id={`Processing_${id}_Fee`} placeholder="Fee" title="Fee" min="0" partB={partB} />
                 </div>
             </div>
         );
     }
 }
 
-export default CardInput;
+const mapStateToProps = (stateV) => {
+    return (stateV);
+};
+
+export default connect(mapStateToProps, {updateStateValue})(CardInput);
