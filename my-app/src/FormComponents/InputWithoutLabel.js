@@ -15,23 +15,23 @@ class CardInput extends Component {
                 </div>
 
                 <div className="col-sm-2">
-                    <InputWithLabel id={`Processing_${id}_Volume`} placeholder="$" title="Volume" min="0" partB={partB} />
+                    <InputWithLabel id={`Processing_${id}_Volume`} placeholder="$" title="Volume" min="0" partB={partB} noDollar />
                 </div>
 
                 <div className="col-sm-2">
-                    <InputWithLabel id={`Processing_${id}_Number`} placeholder="#" title="#" min="0" partB={partB} />
+                    <InputWithLabel id={`Processing_${id}_Number`} placeholder="#" title="#" min="0" partB={partB} noDollar />
                 </div>
 
                 <div className="col-sm-2">
-                    <InputWithLabel id={`Processing_${id}_Percentage`} placeholder="%" title="%" min="0" partB={partB} />
+                    <InputWithLabel id={`Processing_${id}_Percentage`} placeholder="%" title="%" min="0" partB={partB} noDollar />
                 </div>
 
                 <div className="col-sm-2">
-                    <InputWithLabel id={`Processing_${id}_Item`} placeholder="%" title="%" min="0" partB={partB} />
+                    <InputWithLabel id={`Processing_${id}_Item`} placeholder="$" title="$" min="0" partB={partB} noDollar />
                 </div>
 
                 <div className="col-sm-2">
-                    <InputWithLabel id={`Processing_${id}_Fee`} placeholder="Fee" title="Fee" min="0" partB={partB} />
+                    <InputWithLabel id={`Processing_${id}_Fee`} placeholder="" title="Fee" min="0" partB={partB} readonly noDollar />
                 </div>
             </div>
         );

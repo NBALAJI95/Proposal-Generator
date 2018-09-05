@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import { Button, Form } from 'reactstrap';
-
+import { Button, Form, Progress } from 'reactstrap';
 import logo from './logo.svg';
 import './App.css';
 import BusinessInfo from './FormComponents/BusinessInfo.js';
@@ -17,7 +16,7 @@ const currency = (val, cond) => {
         val = `$ ${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
     else
         val = `${parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2})}`;
-    return (val !== '$ NaN') ? val : ' ';
+    return (val !== '$ NaN' && val !== 'NaN') ? val : '';
 };
 
 class App extends Component {
@@ -43,15 +42,22 @@ class App extends Component {
       <div className="App">
 
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={"https://github.com/NBALAJI95/Titanium-Web-Project/blob/master/logo.png?raw=true"} className="App-logo" alt="logo" />
+          <br/><br/>
           <h1 className="App-title"> Proposal Generator </h1>
+          <br/><br/>
         </header>
 
         <div style={fixed}>
-            <b>Current Effective rate: {(partA.Total.Total_Fee / partA.volume * 100) || '-'} %</b> <br/>
-            <b>New Effective rate: {(partB.Total.Total_Fee / partB.volume * 100) || '-'} %</b> <br/>
+            <b>Current Effective rate: {currency(partA.Total.Total_Fee / partA.volume * 100) || '-'} %</b> <br/>
+            <b>New Effective rate: {currency(partB.Total.Total_Fee / partB.volume * 100) || '-'} %</b> <br/>
             <b>Savings %: {((partA.Total.Total_Fee - partB.Total.Total_Fee)/(partA.Total.Total_Fee)*100 === 0) ? 0 :
-                ((partA.Total.Total_Fee - partB.Total.Total_Fee)/(partA.Total.Total_Fee)*100 || '-')} %</b>
+                (currency((partA.Total.Total_Fee - partB.Total.Total_Fee)/(partA.Total.Total_Fee)*100) || '-')} %</b><br/>
+            <b>Monthly Savings: {currency((partA.Total.Total_Fee) - (partB.Total.Total_Fee), true)}</b>
+        </div>
+
+        <div style={fixed2}>
+            <Progress striped value={this.props.State.progress} />
         </div>
 
         <div className="container-fluid">
@@ -84,16 +90,18 @@ class App extends Component {
 
                 <AdditionalFee typeVal="partB" />
 
-                <Total label="Monthly Savings" value={currency((partA.Total.Total_Fee) - (partB.Total.Total_Fee), true)} />
+                <div style={{ border: "3px solid black" }}>
+                    <Total label="Monthly Savings" value={currency((partA.Total.Total_Fee) - (partB.Total.Total_Fee), true)} />
 
-                <Total label="Savings %" value={currency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee))
-                    / (partA.Total.Total_Fee) * 100, false)+"%"} />
+                    <Total label="Savings %" value={(currency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee))
+                        / (partA.Total.Total_Fee) * 100, false) || " -")+" %"} />
 
-                <Total label="1 Year Savings" value={currency(((partA.Total.Total_Fee)
-                    - (partB.Total.Total_Fee)) * 12, true)} />
+                    <Total label="1 Year Savings" value={currency(((partA.Total.Total_Fee)
+                        - (partB.Total.Total_Fee)) * 12, true)} />
 
-                <Total label="3 Years Savings" value={currency(((partA.Total.Total_Fee)
-                    - (partB.Total.Total_Fee)) * 12 * 3, true )} />
+                    <Total label="3 Years Savings" value={currency(((partA.Total.Total_Fee)
+                        - (partB.Total.Total_Fee)) * 12 * 3, true )} />
+                </div>
 
                 <hr/>
 
@@ -104,6 +112,7 @@ class App extends Component {
                     <Excel value={this.props.State} />
                 </div>
                 <br/>
+                <br/>
             </Form>
         </div>
       </div>
@@ -112,8 +121,13 @@ class App extends Component {
 }
 
 const fixed = {
-    position: "fixed", top: 0, right: 0, backgroundColor: "white",
-    zIndex: 100, border: "3px solid #73AD21", padding: "5px"
+    position: "fixed", top: 0, right: 0, backgroundColor: "rgba(255, 255, 255, 0.92)",
+    zIndex: 100, border: "3px solid #73AD21", padding: "5px", textAlign: "right"
+};
+
+const fixed2 = {
+    position: "fixed", bottom: 0, width: '100%', backgroundColor: "rgba(255, 255, 255, 0.7)",
+    zIndex: 100, border: "1px solid black", padding: "5px", textAlign: "right"
 };
 
 const mapStateToProps = (stateV) => {

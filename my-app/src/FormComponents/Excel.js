@@ -125,12 +125,19 @@ const TotalFee_AND_ER = (label, firstVal, secondVal, lastC = false) => {
     ]);
     }
 };
-
-const renderSavings = (label, value) => ([
-    {value: label, style: {font:{color: {rgb: "FFFFFF"},bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
-    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
-    {value, style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
-]);
+// , style: {}
+const renderSavings = (label, value, lastCond=false) => {
+    let border = [];
+    if(lastCond)
+        border = [setBorder(["left", "bottom"]), setBorder(["bottom"]), setBorder(["right", "bottom"])];
+    else
+        border = [setBorder(["left"]), {}, setBorder(["right"])];
+    return ([
+    {value: label, style: {border: border[0], font:{color: {rgb: "FFFFFF"},bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+    {value: "", style: {border: border[1],fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+    {value, style: {border: border[2], font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+    ]);
+};
 
 const setValues = (value, valueB) => {
     multiDataSet = [
@@ -207,11 +214,11 @@ const setValues = (value, valueB) => {
                         (parseFloat(valueB.volume) || 0)*100)).toFixed(2)} %`, true),
 
                 [], [{value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""},
-                    {value: "MONTHLY SAVINGS", style: {font:{color: {rgb: "FFFFFF"}, bold: true},
+                    {value: "MONTHLY SAVINGS", style: {border: setBorder(["left", "top"]), font:{color: {rgb: "FFFFFF"}, bold: true},
                         fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
-                    {value: "", style: {fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+                    {value: "", style: {border: setBorder(["top"]), fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
                     {value: `${currency(value.Total.Total_Fee - valueB.Total.Total_Fee, true)}`,
-                        style: {font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
+                        style: {border: setBorder(["right", "top"]), font:{color: {rgb: "FFFFFF"}, bold: true}, fill: {patternType: "solid", fgColor: {rgb: "538DD5"}}}},
                 ],
 
                 [{value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""},
@@ -222,7 +229,7 @@ const setValues = (value, valueB) => {
                     ...renderSavings("1 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12, true)}`)],
 
                 [{value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""}, {value: ""},
-                    ...renderSavings("3 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12 * 3, true)}`)]
+                    ...renderSavings("3 YEAR SAVINGS", `${currency((value.Total.Total_Fee - valueB.Total.Total_Fee) * 12 * 3, true)}`, true)]
             ]
         },
     ];
@@ -257,7 +264,8 @@ const Excel = (props) => {
 
     return (
     <div style={{display: 'inline-block'}}>
-        <ExcelFile element={<input type="submit" disabled={enableCondition(values) && enableCondition(valuesB)} className="btn btn-primary" value="Submit" />}>
+        <ExcelFile element={<input type="submit" disabled={enableCondition(values) && enableCondition(valuesB)}
+            className="btn btn-primary" value="Submit" />}>
             <ExcelSheet dataSet={multiDataSet} name="Organization"/>
         </ExcelFile>
     </div>);

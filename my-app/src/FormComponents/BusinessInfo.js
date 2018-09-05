@@ -14,12 +14,12 @@ class BusinessInfo extends Component {
                 <FormGroup>
                     <div className="row">
                         <div className="col-sm-6">
-                        <InputWithLabel id="businessName" partB={typeVal} type="text" label="Business Name" required
+                        <InputWithLabel noDollar id="businessName" partB={typeVal} type="text" label="Business Name" required
                             placeholder="eg. John Smith" title="Type your Business Name here" />
                         </div>
 
                         <div className="col-sm-6">
-                            <InputWithLabel id="currentProvider" partB={typeVal} type="text" label="Current Provider"
+                            <InputWithLabel noDollar id="currentProvider" partB={typeVal} type="text" label="Current Provider"
                                 placeholder="eg. Clover" title="Type your Current Provider" required />
                         </div>
                     </div>
@@ -39,7 +39,7 @@ class BusinessInfo extends Component {
 
                         <div className="col-sm-4">
                             <InputWithLabel id="transactions" partB={typeVal} label="Total Transactions" placeholder="eg. 75"
-                                title="Total Transactions" min="0" required />
+                                title="Total Transactions" min="0" required noDollar />
                         </div>
                     </div>
                 </FormGroup>

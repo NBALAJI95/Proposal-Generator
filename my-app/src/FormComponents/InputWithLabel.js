@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import {updateStateValue} from "../actions";
-import { Label, Input } from 'reactstrap';
+import { Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 
 /*const commaFeature = (id) => {
     const tmp = parseFloat($(id).val()).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2});
@@ -28,23 +28,31 @@ const numberInput = (id) => {
 };*/
 
 class InputWithLabel extends Component {
-    
-    focus(event) {
-        // console.log("Focused");
-    }
 
     static requiredLabel(req) {
         if(req)
             return (<span style={{color: 'red'}}> *</span>);
     }
 
-    handleChange(event) {
-        let val = '', name = event.target.name;
+    blur(event) {
+    }
 
-        if(event.target.type === "number")
-            val = parseFloat(event.target.value);
-        else
-            val = event.target.value;
+    handleChange(event) {
+        let val, name = event.target.name;
+        const type = this.props.type || 'number';
+
+        val = event.target.value;
+
+        if(type === 'number') {
+            if(event.target.value !== "." && isNaN(event.target.value)) {
+                val = "";
+            }
+            else {
+                if(event.target.name === "transactions" || (event.target.name.indexOf("Number")) > -1) {
+                    val = isNaN(parseInt(event.target.value)) ? "": parseInt(event.target.value);
+                }
+            }
+        }
 
         if(event.target.name.indexOf("_") >= 0) {
             name = event.target.name.split('_');
@@ -54,7 +62,7 @@ class InputWithLabel extends Component {
                 name = "AdditionalFees";
             }
             else if (name[0] === "Processing") {
-                const pf = Object.assign({}, this.StateV[`ProcessingFees`][name[1]], { [name[2]]: val });
+                const pf = Object.assign({}, this.StateV[`ProcessingFees`][name[1]], { [name[2]]: (val) });
                 val = Object.assign({}, this.StateV[`ProcessingFees`], {[name[1]]: pf});
                 name = 'ProcessingFees';
             }
@@ -64,7 +72,7 @@ class InputWithLabel extends Component {
 
     renderInput() {
         let name = '';
-        const { id, type, partB, title, placeholder, required, min } = this.props;
+        const { id, partB, title, placeholder, required, min, noDollar, readonly } = this.props;
         let Value;
 
         if(id.indexOf("_") >= 0) {
@@ -81,9 +89,12 @@ class InputWithLabel extends Component {
         }
 
         return (
-            <Input onFocus={this.focus.bind(this)} type={type || "number"} className="form-control"
-               value={Value} id={`${id}_${(partB || 'partA')}`} name={id} title={title} placeholder={placeholder}
-               required={required} onChange={this.handleChange.bind(this)} min={min} step={(type)?"":"0.01"} />
+            <InputGroup>
+                {(!noDollar) ? <InputGroupAddon addonType="prepend">$</InputGroupAddon> : null}
+                <Input type={"text"} className="form-control" autoComplete = "off" onBlur={this.blur.bind(this)}
+                   value={Value} id={`${id}_${(partB || 'partA')}`} name={id} title={title} placeholder={placeholder}
+                   required={required} onChange={this.handleChange.bind(this)} min={min} readOnly={readonly} />
+            </InputGroup>
         );
     }
 

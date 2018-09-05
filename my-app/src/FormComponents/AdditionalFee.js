@@ -164,7 +164,7 @@ class AdditionalFee extends Component {
 
                     <Total label="Effective Rate"
                        value={(ValueOf(( (this.StateV.Total.Total_Fee / ValueOf(this.StateV.volume)) * 100).toFixed(2))
-                       || "N/A" )+ "%"} />
+                       || " - " )+ "%"} />
 
                     <hr/>
 

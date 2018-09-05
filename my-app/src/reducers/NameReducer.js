@@ -23,13 +23,35 @@ const INITIAL_STATE_A = () => ({
     amexFee: '',
 });
 
+const progress = (state) => {
+    let count = 0;
+    ["partA", "partB"].forEach((part) => {
+        ["businessName", "currentProvider", "volume", "ticket", "transactions", "assoFee", "authFee", "Total"].forEach((item) => {
+            if(item !== "Total") {
+                if (state[part][item].toString().length > 0) {
+                    count++;
+                }
+            }
+            else {
+                if (state[part][item].TotalProcessingFees > 0) {
+                    count++;
+                }
+                if (state[part][item].TotalAdditionalFee > 0) {
+                    count++;
+                }
+            }
+        })
+    });
+    return Object.assign({}, state, {progress: (count/18)*100});
+};
+
 const GET_PART_A = (state) => {
     return {partB: Object.assign({}, state.partA, state.partA.VISA, state.partA.Mastercard, state.partA.Discover,
         state.partA.AMEX)};
 };
 
 const INITIAL_STATE = () => (
-    Object.assign({}, {partA: INITIAL_STATE_A()}, {partB: INITIAL_STATE_A()})
+    Object.assign({}, {partA: INITIAL_STATE_A()}, {partB: INITIAL_STATE_A()}, {progress: 0})
 );
 
 const ValueOf = (val) => (
@@ -85,15 +107,15 @@ export default (state = INITIAL_STATE(), action) => {
         case 'Total':
             const appendVal = {[action.name]: action.val};
             const valueP = Object.assign({}, state[action.part], appendVal);
-            return calculateTotal(Object.assign({}, state, {[action.part]: valueP}), action.part);
+            return progress(calculateTotal(Object.assign({}, state, {[action.part]: valueP}), action.part));
         case 'TOGGLE_CHECK':
             const check = !(state[action.part].amexCheck);
             const valueT = Object.assign({}, state[action.part], {amexCheck: check}, (check)?{}:{amexFee: ''});
-            return calculateTotal(Object.assign({}, state, {[action.part]: valueT}), action.part);
+            return progress(calculateTotal(Object.assign({}, state, {[action.part]: valueT}), action.part));
         case 'RESET':
-            return Object.assign({}, state, {[action.part]:INITIAL_STATE_A()});
+            return progress(Object.assign({}, state, {[action.part]:INITIAL_STATE_A()}));
         case 'FETCH':
-            return Object.assign({}, state, GET_PART_A(state));
+            return progress(Object.assign({}, state, GET_PART_A(state)));
         default:
             return state;
     }
