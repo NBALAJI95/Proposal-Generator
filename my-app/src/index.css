@@ -1,5 +1,23 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
+
+.grid-container {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: 22% 19% 15% 10% 10% 17%;
+}
+
+.grid-container2 {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: 23% 18% 14% 14% 23%;
+}
+
+.grid-container > div, .grid-container2 > div {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+

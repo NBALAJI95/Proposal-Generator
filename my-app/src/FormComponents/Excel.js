@@ -125,7 +125,7 @@ const TotalFee_AND_ER = (label, firstVal, secondVal, lastC = false) => {
     ]);
     }
 };
-// , style: {}
+
 const renderSavings = (label, value, lastCond=false) => {
     let border = [];
     if(lastCond)

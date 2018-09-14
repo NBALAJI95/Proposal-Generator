@@ -35,9 +35,9 @@ class ProcessingFee extends Component {
 
         return (
             <div>
+                <br/>
                 <Heading headingText={"Processing Fees"} required />
-
-                <div className="row" style={{ fontSize: "1.1rem" }}>
+                <div className="row" style={{ fontSize: "1.1rem", paddingTop: "0.7rem" }}>
                     <div className="col-sm-2"> <strong> Card </strong> </div>
 
                     <div className="col-sm-2"> <strong> Volume </strong> </div>

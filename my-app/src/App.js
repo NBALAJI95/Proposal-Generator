@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import { Button, Form, Progress } from 'reactstrap';
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 import BusinessInfo from './FormComponents/BusinessInfo.js';
 import ProcessingFee from './FormComponents/ProcessingFee.js';
@@ -10,6 +10,7 @@ import AssociationNAuth from './FormComponents/AssociationNAuth.js';
 import Total from './FormComponents/Total.js';
 import Excel from './FormComponents/Excel.js';
 import {resetForm, fetchForm} from "./actions";
+import { Link } from 'react-router-dom';
 
 const currency = (val, cond) => {
     if(cond)
@@ -42,7 +43,7 @@ class App extends Component {
       <div className="App">
 
         <header className="App-header">
-          <img src={"https://github.com/NBALAJI95/Titanium-Web-Project/blob/master/logo.png?raw=true"} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo" />
           <br/><br/>
           <h1 className="App-title"> Proposal Generator </h1>
           <br/><br/>
@@ -62,7 +63,8 @@ class App extends Component {
 
         <div className="container-fluid">
             <Form onSubmit={this.handleSubmit.bind(this)} className="Form-Container">
-                <h2 className="text-center"> Current Statement </h2>
+                <h2 className="text-center" style={{fontSize: "1.8rem"}}> Current Statement </h2>
+                <hr/>
 
                 <BusinessInfo />
 
@@ -80,7 +82,8 @@ class App extends Component {
                 <br/><br/>
                 <hr/>
 
-                <h2 className="text-center"> Our Proposal </h2>
+                <h2 className="text-center" style={{fontSize: "1.8rem"}}> Our Proposal </h2>
+                <hr/>
 
                 <BusinessInfo typeVal="partB" />
 
@@ -90,7 +93,7 @@ class App extends Component {
 
                 <AdditionalFee typeVal="partB" />
 
-                <div style={{ border: "3px solid black" }}>
+                <div style={{ border: "3px solid black", width: "400px", margin: "0 auto" }}>
                     <Total label="Monthly Savings" value={currency((partA.Total.Total_Fee) - (partB.Total.Total_Fee), true)} />
 
                     <Total label="Savings %" value={(currency(((partA.Total.Total_Fee) - (partB.Total.Total_Fee))
@@ -109,7 +112,8 @@ class App extends Component {
                     <Button color="secondary" onClick={this.reset.bind(this, "partB")}>
                         Reset B
                     </Button> {' '}
-                    <Excel value={this.props.State} />
+                    <Excel value={this.props.State} /> {' '}
+                    <Link to="/list"><Button color="success"> Dashboard </Button></Link>
                 </div>
                 <br/>
                 <br/>
