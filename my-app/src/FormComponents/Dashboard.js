@@ -4,7 +4,7 @@ import FormRow from "./FormRow.js";
 import logo from '../logo.png';
 import ProposalHeading from './proposalHeading';
 
-import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ErrorBar } from 'recharts';
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
 const getData = ({Current, Ours}) => {
     return ([

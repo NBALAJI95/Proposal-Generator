@@ -37,21 +37,25 @@ class ProcessingFee extends Component {
             <div>
                 <br/>
                 <Heading headingText={"Processing Fees"} required />
-                <div className="row" style={{ fontSize: "1.1rem", paddingTop: "0.7rem" }}>
+                <div className="row" style={{ fontSize: "1.05rem", paddingTop: "0.7rem" }}>
                     <div className="col-sm-2"> <strong> Card </strong> </div>
 
                     <div className="col-sm-2"> <strong> Volume </strong> </div>
 
-                    <div className="col-sm-2"> <strong> # </strong> </div>
+                    <div className="col-sm-2"> <strong> # of Transactions </strong> </div>
 
                     <div className="col-sm-2">
                         <Button onClick={this.clickHandler.bind(this, "Percentage", part)}
-                            title={"Fill the first '%' value for the rest"} outline color="info"> % </Button>{' '}
+                            title={"Fill the first '%' value for the rest"} outline color="info"> % </Button>
+                        <br/>
+                        <b style={{fontSize: '0.9rem'}}>Interchange markup</b>
                     </div>
 
                     <div className="col-sm-2">
                         <Button onClick={this.clickHandler.bind(this, "Item", part)}
-                           title={"Fill the first 'Item' value for the rest"} outline color="info"> Item </Button>{' '}
+                           title={"Fill the first 'Item' value for the rest"} outline color="info"> Item </Button>
+                        <br/>
+                        <b style={{fontSize: '0.9rem'}}>Transaction Fee</b>
                     </div>
 
                     <div className="col-sm-2"> <strong> Fee </strong> </div>

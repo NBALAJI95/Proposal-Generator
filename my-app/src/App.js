@@ -63,6 +63,8 @@ class App extends Component {
 
         <div className="container-fluid">
             <Form onSubmit={this.handleSubmit.bind(this)} className="Form-Container">
+                <b>* NOTE: All values you enter are on monthly basis</b>
+                <br/><br/>
                 <h2 className="text-center" style={{fontSize: "1.8rem"}}> Current Statement </h2>
                 <hr/>
 
