@@ -25,6 +25,6 @@
 .Form-Container {
   width: 85%;
   margin: 0 auto;
-  background-color: azure;
+  background: rgba(233, 240, 252, .4);
   padding: 2rem;
 }

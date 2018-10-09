@@ -23,7 +23,7 @@ const INITIAL_STATE_A = () => ({
     amexFee: '',
 });
 
-const progress = (state) => {
+const progress = (state, r) => {
     let count = 0;
     ["partA", "partB"].forEach((part) => {
         ["businessName", "currentProvider", "volume", "ticket", "transactions", "assoFee", "authFee", "Total"].forEach((item) => {
@@ -42,7 +42,11 @@ const progress = (state) => {
             }
         })
     });
-    return Object.assign({}, state, {progress: (count/18)*100});
+    if(r) {
+        r['R'].progress = (count/18)*100;
+        sessionStorage.setItem("State", JSON.stringify(r['R']));
+    }
+    return storage(Object.assign({}, state, {progress: (count/18)*100, m: true}));
 };
 
 const GET_PART_A = (state) => {
@@ -98,7 +102,33 @@ const calculateTotal = (State, part) => {
     return Object.assign({}, State, {[part]: step1});
 };
 
+const storage = (state) => {
+    let ret = null;
+    if (typeof(Storage) !== "undefined") {
+        if(sessionStorage.getItem("State")) {
+            let t = JSON.parse(sessionStorage.getItem("State"));
+            if(t != null && (state.progress === 0 && state.m !== true)) {
+                ret = JSON.parse(sessionStorage.getItem("State"));
+            }
+            else {
+                sessionStorage.setItem("State", JSON.stringify(state));
+                ret = JSON.parse(sessionStorage.getItem("State"));
+            }
+        }
+        else {
+            sessionStorage.setItem("State", JSON.stringify(state));
+            ret = JSON.parse(sessionStorage.getItem("State"));
+        }
+
+    } else {
+        alert('Session Storage not supported by your browser!');
+        return state;
+    }
+    return ret;
+};
+
 export default (state = INITIAL_STATE(), action) => {
+    state = storage(state);
 
     switch (action.type) {
         case 'InputWithLabel':
@@ -113,7 +143,9 @@ export default (state = INITIAL_STATE(), action) => {
             const valueT = Object.assign({}, state[action.part], {amexCheck: check}, (check)?{}:{amexFee: ''});
             return progress(calculateTotal(Object.assign({}, state, {[action.part]: valueT}), action.part));
         case 'RESET':
-            return progress(Object.assign({}, state, {[action.part]:INITIAL_STATE_A()}));
+            let t = JSON.parse(sessionStorage.getItem("State"));
+            t[action.part] = INITIAL_STATE_A();
+            return progress(Object.assign({}, state, {[action.part]:INITIAL_STATE_A()}), {'R': t});
         case 'FETCH':
             return progress(Object.assign({}, state, GET_PART_A(state)));
         default:

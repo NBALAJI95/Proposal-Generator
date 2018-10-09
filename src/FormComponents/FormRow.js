@@ -35,7 +35,7 @@ const renderBoldFee = (fee, bold) => {
 const FormRow = ({label, partA, partB, bold = false}) => {
 
   let { Volume: VolumeA = "", Number: NumberA = "", Percentage: PercentageA = "", Item: ItemA = "", Fee: FeeA = "" } = partA;
-  let { Volume: VolumeB, Number: NumberB, Percentage: PercentageB, Item: ItemB, Fee: FeeB } = partB;
+  let { Percentage: PercentageB, Item: ItemB, Fee: FeeB } = partB;
 
     if(typeof partB === "string" && typeof partA === "string")
     {
@@ -57,8 +57,8 @@ const FormRow = ({label, partA, partB, bold = false}) => {
           </div>
           <div className="col-5">
               <div className="grid-container2">
-                  <div> <span style={{float: "left"}}>{(currency(VolumeB)) ? '$' : ''}</span> <span style={{float: "right"}}> {currency(VolumeB)} </span> </div>
-                  <div style={{textAlign: "center"}}> {NumberB} </div>
+                  <div> <span style={{float: "left"}}>{(currency(VolumeA)) ? '$' : ''}</span> <span style={{float: "right"}}> {currency(VolumeA)} </span> </div>
+                  <div style={{textAlign: "center"}}> {NumberA} </div>
                   <div style={{textAlign: "center"}}> {`${(PercentageB) || ''}${(PercentageB)? "%":""}`} </div>
                   <div> <span style={{float: "left"}}>{(currency(ItemB)) ? '$' : ''}</span> <span style={{float: "right"}}> {currency(ItemB)} </span> </div>
                   {renderBoldFee(FeeB, bold)}

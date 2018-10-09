@@ -15,11 +15,11 @@ class CardInput extends Component {
                 </div>
 
                 <div className="col-sm-2">
-                    <InputWithLabel id={`Processing_${id}_Volume`} placeholder="$" title="Volume" min="0" partB={partB} noDollar />
+                    <InputWithLabel id={`Processing_${id}_Volume`} placeholder="$" title="Volume" min="0" noDollar />
                 </div>
 
                 <div className="col-sm-2">
-                    <InputWithLabel id={`Processing_${id}_Number`} placeholder="#" title="#" min="0" partB={partB} noDollar />
+                    <InputWithLabel id={`Processing_${id}_Number`} placeholder="#" title="#" min="0" noDollar />
                 </div>
 
                 <div className="col-sm-2">

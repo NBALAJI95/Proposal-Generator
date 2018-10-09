@@ -235,40 +235,40 @@ const setValues = (value, valueB) => {
     ];
 };
 
-const enableCondition = (values) => {
-
-    for (let value of values) {
-        if(value <= 0 || (isNaN(value) && typeof value !== "string")) {
-            return true;
-        }
-    }
-    return false;
-};
+// const enableCondition = (values) => {
+//
+//     for (let value of values) {
+//         if(value <= 0 || (isNaN(value) && typeof value !== "string")) {
+//             return true;
+//         }
+//     }
+//     return false;
+// };
 
 const Excel = (props) => {
     const { partA, partB } = props.value;
-    const { VISA: VISAa, Mastercard: MastercardA, Discover: DiscoverA, AMEX: AMEXa  } = partA.ProcessingFees;
-    const { VISA: VISAb, Mastercard: MastercardB, Discover: DiscoverB, AMEX: AMEXb  } = partB.ProcessingFees;
-
-    const value = partA;
+    // const { VISA: VISAa, Mastercard: MastercardA, Discover: DiscoverA, AMEX: AMEXa  } = partA.ProcessingFees;
+    // const { VISA: VISAb, Mastercard: MastercardB, Discover: DiscoverB, AMEX: AMEXb  } = partB.ProcessingFees;
+    //
+    // const value = partA;
 
     setValues(partA, partB);
 
-    const values = [value.Total.Total_Fee, value.Total.TotalAdditionalFee, parseFloat(value.authFee),
-        parseFloat(value.assoFee), (VISAa.Fee + MastercardA.Fee + DiscoverA.Fee + AMEXa.Fee),
-        value.businessName, value.currentProvider, value.volume, value.ticket,value.transactions ];
-
-    const valuesB = [partB.Total.Total_Fee, partB.Total.TotalAdditionalFee, parseFloat(partB.authFee),
-        parseFloat(partB.assoFee), (VISAb.Fee + MastercardB.Fee + DiscoverB.Fee + AMEXb.Fee),
-        partB.businessName, partB.currentProvider, partB.volume, partB.ticket, partB.transactions ];
+    // const values = [value.Total.Total_Fee, value.Total.TotalAdditionalFee, parseFloat(value.authFee),
+    //     parseFloat(value.assoFee), (VISAa.Fee + MastercardA.Fee + DiscoverA.Fee + AMEXa.Fee),
+    //     value.businessName, value.currentProvider, value.volume, value.ticket,value.transactions ];
+    //
+    // const valuesB = [partB.Total.Total_Fee, partB.Total.TotalAdditionalFee, parseFloat(partB.authFee),
+    //     parseFloat(partB.assoFee), (VISAb.Fee + MastercardB.Fee + DiscoverB.Fee + AMEXb.Fee),
+    //     partB.businessName, partB.currentProvider, partB.volume, partB.ticket, partB.transactions ];
 
     return (
     <div style={{display: 'inline-block'}}>
-        <ExcelFile element={<input type="submit" disabled={enableCondition(values) && enableCondition(valuesB)}
-            className="btn btn-primary" value="Submit" />}>
+        <ExcelFile element={<input type="submit"
+            className="btn btn-primary" value="Download Excel" />}>
             <ExcelSheet dataSet={multiDataSet} name="Organization"/>
         </ExcelFile>
     </div>);
 };
-
+//disabled={enableCondition(values) && enableCondition(valuesB)}
 export default Excel;

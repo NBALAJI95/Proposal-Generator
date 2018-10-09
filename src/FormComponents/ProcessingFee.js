@@ -3,7 +3,7 @@ import CardInput from './InputWithoutLabel';
 import Heading from './Heading.js';
 import Total from './Total.js';
 import {connect} from "react-redux";
-import { FormGroup, Button } from 'reactstrap';
+import { FormGroup, Button, UncontrolledTooltip } from 'reactstrap';
 import {updateStateValue} from "../actions";
 
 class ProcessingFee extends Component {
@@ -45,15 +45,24 @@ class ProcessingFee extends Component {
                     <div className="col-sm-2"> <strong> # of Transactions </strong> </div>
 
                     <div className="col-sm-2">
-                        <Button onClick={this.clickHandler.bind(this, "Percentage", part)}
-                            title={"Fill the first '%' value for the rest"} outline color="info"> % </Button>
+                        <Button id={`percentage_${part}`} color="info" onClick={this.clickHandler.bind(this, "Percentage", part)}>
+                            %
+                            <UncontrolledTooltip placement="top" target={`percentage_${part}`}>
+                                {"Fill the 1st '%' value for the rest"}
+                            </UncontrolledTooltip>
+                        </Button>{' '}
                         <br/>
                         <b style={{fontSize: '0.9rem'}}>Interchange markup</b>
                     </div>
 
-                    <div className="col-sm-2">
-                        <Button onClick={this.clickHandler.bind(this, "Item", part)}
-                           title={"Fill the first 'Item' value for the rest"} outline color="info"> Item </Button>
+                    <div id="TooltipExample" className="col-sm-2">
+
+                        <Button id={`Item_${part}`} color="info" onClick={this.clickHandler.bind(this, "Item", part)}>                            Item
+                            <UncontrolledTooltip placement="top" target={`Item_${part}`}>
+                                {"Fill the 1st 'Item' value for the rest"}
+                            </UncontrolledTooltip>
+                        </Button>{' '}
+
                         <br/>
                         <b style={{fontSize: '0.9rem'}}>Transaction Fee</b>
                     </div>

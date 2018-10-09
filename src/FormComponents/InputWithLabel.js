@@ -91,7 +91,7 @@ class InputWithLabel extends Component {
         return (
             <InputGroup>
                 {(!noDollar) ? <InputGroupAddon addonType="prepend">$</InputGroupAddon> : null}
-                <Input type={"text"} className="form-control" autoComplete = "off" onBlur={this.blur.bind(this)}
+                <Input type={"text"} className="form-control" autoComplete = "off" onBlur={this.props.onBlur}
                    value={Value} id={`${id}_${(partB || 'partA')}`} name={id} title={title} placeholder={placeholder}
                    required={required} onChange={this.handleChange.bind(this)} min={min} readOnly={readonly} />
             </InputGroup>
