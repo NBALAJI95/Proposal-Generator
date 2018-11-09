@@ -37,7 +37,7 @@ class AssociationNAuth extends Component {
                 <FormGroup>
                     <div className="row">
                         <div className="col-sm-6">
-                            <InputWithLabel id="assoFee" partB={typeVal} label="Association Fees" placeholder="Amount (USD)"
+                            <InputWithLabel id="assoFee" icon={"IoIosHelpCircle"} partB={typeVal} label="Association Fees" placeholder="Amount (USD)"
                                 title="Association Fees" min="0" required />
 
                             <div style={{paddingTop: "0.5rem"}} className="form-group">
@@ -58,8 +58,8 @@ class AssociationNAuth extends Component {
                         </div>
 
                         <div className="col-sm-6">
-                            <InputWithLabel id="authFee" partB={typeVal} label="Other Auth fees" placeholder="Amount (USD)"
-                                title="Other Auth fees" min="0" required />
+                            <InputWithLabel id="authFee" icon={"IoIosHelpCircleOutline"} partB={typeVal} label="Other Auth fees" placeholder="Amount (USD)"
+                                title="Other Auth fees" min="0" />
                         </div>
                     </div>
                 </FormGroup>

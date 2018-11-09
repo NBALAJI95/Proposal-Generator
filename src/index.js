@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SavingsComparisonSheet from './FormComponents/Dashboard';
+import CashDiscount from './FormComponents/CashDiscount';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './reducers';
@@ -17,6 +18,7 @@ const jsx = (
             <div>
                 <Route exact path="/" component={App} />
                 <Route path="/list" component={SavingsComparisonSheet} />
+                <Route path="/cashDiscount" component={CashDiscount} />
             </div>
         </Router>
     </Provider>

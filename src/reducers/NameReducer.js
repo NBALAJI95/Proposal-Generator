@@ -26,7 +26,7 @@ const INITIAL_STATE_A = () => ({
 const progress = (state, r) => {
     let count = 0;
     ["partA", "partB"].forEach((part) => {
-        ["businessName", "currentProvider", "volume", "ticket", "transactions", "assoFee", "authFee", "Total"].forEach((item) => {
+        ["businessName", "currentProvider", "volume", "ticket", "transactions", "assoFee", "Total"].forEach((item) => {
             if(item !== "Total") {
                 if (state[part][item].toString().length > 0) {
                     count++;
@@ -46,7 +46,7 @@ const progress = (state, r) => {
         r['R'].progress = (count/18)*100;
         sessionStorage.setItem("State", JSON.stringify(r['R']));
     }
-    return storage(Object.assign({}, state, {progress: (count/18)*100, m: true}));
+    return storage(Object.assign({}, state, {progress: (count/16)*100, m: true}));
 };
 
 const GET_PART_A = (state) => {

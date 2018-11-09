@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
-import { Button, Form, Progress, UncontrolledTooltip } from 'reactstrap';
+import { Button, Form, Progress, UncontrolledTooltip, FormGroup, Input, Label, CustomInput } from 'reactstrap';
 import logo from './logo.png';
 import './App.css';
 import BusinessInfo from './FormComponents/BusinessInfo.js';
@@ -9,8 +9,9 @@ import AdditionalFee from './FormComponents/AdditionalFee.js';
 import AssociationNAuth from './FormComponents/AssociationNAuth.js';
 import Total from './FormComponents/Total.js';
 import Excel from './FormComponents/Excel.js';
-import {resetForm, fetchForm} from "./actions";
+import {resetForm, fetchForm, updateCommon, resetCashDiscount} from "./actions";
 import { Link } from 'react-router-dom';
+import CashDiscountInput from './FormComponents/CashDiscountInput';
 
 const currency = (val, cond) => {
     if(cond)
@@ -25,7 +26,8 @@ class App extends Component {
       super(props);
 
       this.state = {
-        tooltipOpen: false
+        tooltipOpen: false,
+        format: 'Cash Discount'
       };
     }
 
@@ -44,24 +46,73 @@ class App extends Component {
     }
 
     handleSubmit(event) {
-        this.reset("partA");
-        this.reset("partB");
         event.preventDefault();
     }
 
-    render() {
+    renderCheck() {
+        if(this.state.format === "Interchange +") {
+            return this.renderInterchangePlus();
+        } else if(this.state.format === "Cash Discount") {
+            return this.renderCashDiscount();
+        }
+    }
+
+    onOverviewCheck(event) {
+            return this.props.updateCommon('overview', !this.props.CashDiscountState.overview, null);
+    }
+
+    renderCashDiscount() {
+        return (
+            <div>
+                <div className="container-fluid">
+                    <Form className="Form-Container">
+                        <h2 className="text-center" style={{fontSize: "1.8rem"}}> Current Statement </h2>
+                        <hr/>
+
+                        <CashDiscountInput name={"volumeA"} labelText={"Total Credit Card Volume (monthly)"} />
+
+                        <CashDiscountInput name={"FeesA"} labelText={"Total Fees"} />
+
+                        <br/>
+
+                        <h2 className="text-center" style={{fontSize: "1.8rem"}}> Our Proposal </h2>
+                        <hr/>
+
+                        <CashDiscountInput name={"volumeB"} labelText={"Total Credit Card Volume (monthly)"} />
+
+                        <CashDiscountInput name={"FeesB"} labelText={"Total Fees"} />
+
+                        <div>
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" checked={this.props.CashDiscountState.overview}
+                                       onChange={this.onOverviewCheck.bind(this)} id="overview" />
+                                        <em style={{fontSize: '1.1rem'}}>
+                                            {"Include Overview?"}
+                                        </em>
+                                </Label>
+                            </FormGroup>
+
+                        </div>
+
+                        <div style={{float: "right"}} className="form-group">
+                            <Button color="primary" onClick={() => this.props.resetCashDiscount()}>
+                                Reset
+                            </Button> {' '}
+                            <Link to="/cashDiscount"><Button color="success"> Submit </Button></Link>
+                        </div>
+                        <br/>
+                    </Form>
+                </div>
+            </div>
+        );
+    }
+
+    renderInterchangePlus() {
         const { partA, partB } = this.props.State;
 
         return (
-            <div className="App">
-
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <br/><br/>
-                    <h1 className="App-title"> Proposal Generator </h1>
-                    <br/><br/>
-                </header>
-
+            <div>
                 <div style={fixed}>
                     <b>Current Effective rate: {currency(partA.Total.Total_Fee / partA.volume * 100) || '-'} %</b> <br/>
                     <b>New Effective rate: {currency(partB.Total.Total_Fee / partB.volume * 100) || '-'} %</b> <br/>
@@ -142,6 +193,33 @@ class App extends Component {
             </div>
         );
     }
+
+    selection(event) {
+        console.log(this.state);
+        this.setState({ format: event.target.value });
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo" />
+                    <br/><br/>
+                    <h1 className="App-title"> Proposal Generator </h1>
+                    <br/><br/>
+                </header>
+                <FormGroup style={{ padding: '20%', paddingTop: '1.5rem', paddingBottom: '1.5rem' }}>
+                    <Label for="exampleSelect"> Select the format </Label>
+                    <CustomInput  type="select" name="select" id="exampleSelect" value={this.state.format} onChange={this.selection.bind(this)}>
+                        <option>{''}</option>
+                        <option> Interchange + </option>
+                        <option> Cash Discount </option>
+                    </CustomInput >
+                </FormGroup>
+                {this.renderCheck()}
+            </div>
+        );
+    }
 }
 
 const fixed = {
@@ -158,4 +236,4 @@ const mapStateToProps = (stateV) => {
     return (stateV);
 };
 
-export default connect(mapStateToProps, {resetForm, fetchForm})(App)
+export default connect(mapStateToProps, {resetForm, fetchForm, updateCommon, resetCashDiscount})(App)

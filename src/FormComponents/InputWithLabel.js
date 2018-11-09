@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from "react-redux";
 import {updateStateValue} from "../actions";
 import { Label, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import { IoIosHelpCircle, IoIosHelpCircleOutline } from 'react-icons/io';
+import { UncontrolledTooltip } from 'reactstrap';
 
 /*const commaFeature = (id) => {
     const tmp = parseFloat($(id).val()).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits:2});
@@ -98,6 +100,27 @@ class InputWithLabel extends Component {
         );
     }
 
+    renderIcon(i) {
+        if(i && i==="IoIosHelpCircle") {
+            return (
+                <span id={`dark_${(this.props.partB || 'partA')}`}>
+                    <IoIosHelpCircle />
+                    <UncontrolledTooltip placement="top" target={`dark_${(this.props.partB || 'partA')}`}>
+                        {"These are the base interchange fees, also called processing fees. Essentially, all other interchange pass through fees added up."}
+                    </UncontrolledTooltip>
+                </span>);
+        }
+        else if(i){
+            return (
+                <span id={`light_${(this.props.partB || 'partA')}`}>
+                    <IoIosHelpCircleOutline />
+                    <UncontrolledTooltip placement="top" target={`light_${(this.props.partB || 'partA')}`}>
+                        {"This could be excessive Auths or other Auth/transaction fees incurred."}
+                    </UncontrolledTooltip>
+                </span>);
+        }
+    }
+
     renderLabel(label) {
         if(label) {
             return (
@@ -105,6 +128,7 @@ class InputWithLabel extends Component {
                     <Label for={`${this.props.id}_${(this.props.partB || 'partA')}`} style={{marginTop: '0.5rem'}}>
                         {this.props.label}
                         {InputWithLabel.requiredLabel(this.props.required)}
+                        {"\t"}{this.renderIcon(this.props.icon)}
                     </Label>
                 </strong>
             );

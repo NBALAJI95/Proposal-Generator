@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-eslint": "9.0.0",
     "react": "^16.5.2",
     "react-data-export": "^0.5.0",
     "react-dom": "^16.5.2",
+    "react-icons": "^3.2.1",
+    "react-pdf": "^3.0.5",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.3",
@@ -20,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 sync build/ s3://proposalgenerator"
+    "deploy": "aws s3 sync build/ s3://proposal-generator-mls"
   },
   "eslintConfig": {
     "extends": "react-app"

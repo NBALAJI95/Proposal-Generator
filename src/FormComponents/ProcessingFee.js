@@ -48,7 +48,7 @@ class ProcessingFee extends Component {
                         <Button id={`percentage_${part}`} color="info" onClick={this.clickHandler.bind(this, "Percentage", part)}>
                             %
                             <UncontrolledTooltip placement="top" target={`percentage_${part}`}>
-                                {"Fill the 1st '%' value for the rest"}
+                                {`Fill the 1st '%' value for the rest. NOTE: This is the basis point markup on top of interchange.`}
                             </UncontrolledTooltip>
                         </Button>{' '}
                         <br/>
@@ -59,7 +59,7 @@ class ProcessingFee extends Component {
 
                         <Button id={`Item_${part}`} color="info" onClick={this.clickHandler.bind(this, "Item", part)}>                            Item
                             <UncontrolledTooltip placement="top" target={`Item_${part}`}>
-                                {"Fill the 1st 'Item' value for the rest"}
+                                {"Fill the 1st 'Item' value for the rest."}
                             </UncontrolledTooltip>
                         </Button>{' '}
 
