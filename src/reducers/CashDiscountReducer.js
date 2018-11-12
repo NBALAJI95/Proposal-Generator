@@ -11,7 +11,8 @@ const INITIAL_STATE = () => ({
         additionalFees: {},
         modalFees: ''
     },
-    overview: false
+    overview: false,
+    additional: new Set()
 });
 
 export default (state = INITIAL_STATE(), action) => {
@@ -22,11 +23,12 @@ export default (state = INITIAL_STATE(), action) => {
             return Object.assign({}, state, {[action.part]: tmp});
         case 'UPDATE_ADDITIONAL_FEES':
             const t = Object.assign({}, state[action.part].additionalFees, {[action.name]: action.val});
+
             const additional = {
                 ...state[action.part],
                 additionalFees: t
             };
-            return Object.assign({}, state, {[action.part]: additional});
+            return Object.assign({}, state, {additional: state.additional.add(action.name)}, {[action.part]: additional});
         case 'UPDATE_COMMON':
             if(action.part) {
                 const modal = { ...state[action.part], modalFees: action.val };
@@ -36,6 +38,8 @@ export default (state = INITIAL_STATE(), action) => {
             }
         case 'RESET_CASH_DISCOUNT':
             return INITIAL_STATE();
+        case 'COPY_CASH_DISCOUNT':
+            return Object.assign({}, state, {partB: state.partA});
         default:
             return state;
     }

@@ -56,15 +56,13 @@ class CashDiscountInput extends Component {
     renderNewFees(below, part) {
         const { State } = this.props;
         if(below.startsWith("Fees")) {
-
-            return Object.keys(State[part].additionalFees).map((fee) => {
+            return [...State.additional].map((fee) => {
                 return (
                     <div className='row' key={fee} style={{ marginTop: "1rem" }}>
                         <div className="col-sm-6" style={{textAlign: 'right'}}>
                             <strong> <Label for={fee}> {fee} </Label> </strong>
                         </div>
                         <div className="col-md-4">
-                            {console.log("State[part].additionalFees[fee]", State[part].additionalFees[fee])}
                             <InputGroup>
                                 <InputGroupAddon addonType="prepend">$</InputGroupAddon>
                                 <Input type="number" className="form-control" id={fee} value={State[part].additionalFees[fee]}

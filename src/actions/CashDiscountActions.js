@@ -22,3 +22,10 @@ export const resetCashDiscount = () => (
     }
 );
 
+export const copyCashDiscount = () => (
+    {
+        type: 'COPY_CASH_DISCOUNT'
+    }
+);
+
+

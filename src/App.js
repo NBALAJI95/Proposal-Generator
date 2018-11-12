@@ -9,7 +9,7 @@ import AdditionalFee from './FormComponents/AdditionalFee.js';
 import AssociationNAuth from './FormComponents/AssociationNAuth.js';
 import Total from './FormComponents/Total.js';
 import Excel from './FormComponents/Excel.js';
-import {resetForm, fetchForm, updateCommon, resetCashDiscount} from "./actions";
+import {resetForm, fetchForm, updateCommon, resetCashDiscount, copyCashDiscount} from "./actions";
 import { Link } from 'react-router-dom';
 import CashDiscountInput from './FormComponents/CashDiscountInput';
 
@@ -27,7 +27,7 @@ class App extends Component {
 
       this.state = {
         tooltipOpen: false,
-        format: 'Cash Discount'
+        format: ''
       };
     }
 
@@ -75,6 +75,12 @@ class App extends Component {
 
                         <br/>
 
+                        <div style={{float: "right"}} className="form-group">
+                            <Button color="primary" onClick={() => this.props.copyCashDiscount()}>
+                                Copy
+                            </Button> {' '}
+                        </div>
+
                         <h2 className="text-center" style={{fontSize: "1.8rem"}}> Our Proposal </h2>
                         <hr/>
 
@@ -99,7 +105,10 @@ class App extends Component {
                             <Button color="primary" onClick={() => this.props.resetCashDiscount()}>
                                 Reset
                             </Button> {' '}
-                            <Link to="/cashDiscount"><Button color="success"> Submit </Button></Link>
+                            {console.log('Passing props', this.props.CashDiscountState)}
+                            <Link to={{pathname: "/cashDiscount", state: this.props.CashDiscountState}}>
+                                <Button color="success"> Submit </Button>
+                            </Link>
                         </div>
                         <br/>
                     </Form>
@@ -236,4 +245,4 @@ const mapStateToProps = (stateV) => {
     return (stateV);
 };
 
-export default connect(mapStateToProps, {resetForm, fetchForm, updateCommon, resetCashDiscount})(App)
+export default connect(mapStateToProps, {resetForm, fetchForm, updateCommon, resetCashDiscount, copyCashDiscount})(App)
