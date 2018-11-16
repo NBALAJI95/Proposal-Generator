@@ -12,6 +12,7 @@ import Excel from './FormComponents/Excel.js';
 import {resetForm, fetchForm, updateCommon, resetCashDiscount, copyCashDiscount} from "./actions";
 import { Link } from 'react-router-dom';
 import CashDiscountInput from './FormComponents/CashDiscountInput';
+import BusinessInfoCashDiscount from './FormComponents/BusinessInfoCashDiscount';
 
 const currency = (val, cond) => {
     if(cond)
@@ -69,8 +70,8 @@ class App extends Component {
                         <h2 className="text-center" style={{fontSize: "1.8rem"}}> Current Statement </h2>
                         <hr/>
 
-                        <CashDiscountInput name={"volumeA"} labelText={"Total Credit Card Volume (monthly)"} />
-
+                        <BusinessInfoCashDiscount part={'partA'} />
+                        <br/>
                         <CashDiscountInput name={"FeesA"} labelText={"Total Fees"} />
 
                         <br/>
@@ -84,8 +85,8 @@ class App extends Component {
                         <h2 className="text-center" style={{fontSize: "1.8rem"}}> Our Proposal </h2>
                         <hr/>
 
-                        <CashDiscountInput name={"volumeB"} labelText={"Total Credit Card Volume (monthly)"} />
-
+                        <BusinessInfoCashDiscount part={'partB'} includeServiceFee />
+                        <br/>
                         <CashDiscountInput name={"FeesB"} labelText={"Total Fees"} />
 
                         <div>

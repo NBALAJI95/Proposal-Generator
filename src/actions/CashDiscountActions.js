@@ -22,6 +22,13 @@ export const resetCashDiscount = () => (
     }
 );
 
+export const updateBusinessInfo = (prop, val) => {
+    console.log('&&&&&&', prop, val)
+    return ({
+        type: 'BUSINESS_INFO', name: prop, val
+    });
+};
+
 export const copyCashDiscount = () => (
     {
         type: 'COPY_CASH_DISCOUNT'

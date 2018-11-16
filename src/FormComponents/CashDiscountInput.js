@@ -58,15 +58,17 @@ class CashDiscountInput extends Component {
         if(below.startsWith("Fees")) {
             return [...State.additional].map((fee) => {
                 return (
-                    <div className='row' key={fee} style={{ marginTop: "1rem" }}>
-                        <div className="col-sm-6" style={{textAlign: 'right'}}>
-                            <strong> <Label for={fee}> {fee} </Label> </strong>
+                    <div key={fee} style={{ width: '25%', margin: '0 auto', marginTop: "1rem" }}>
+                        <div style={{textAlign: 'center'}}>
+                            <strong>
+                                <Label for={fee}> {fee} </Label>
+                            </strong>
                         </div>
-                        <div className="col-md-4">
+                        <div>
                             <InputGroup>
                                 <InputGroupAddon addonType="prepend">$</InputGroupAddon>
                                 <Input type="number" className="form-control" id={fee} value={State[part].additionalFees[fee]}
-                                       onChange={(evt) => this.inputValueHandler(evt, `fees_${fee}`, part)}
+                                   onChange={(evt) => this.inputValueHandler(evt, `fees_${fee}`, part)}
                                 />
                             </InputGroup>
                         </div>
@@ -101,15 +103,16 @@ class CashDiscountInput extends Component {
                     </ModalFooter>
                 </Modal>
 
-                <div className="row" style={{ marginTop: "1rem", marginBottom: "1rem", textAlign:'right'}}>
-                    <div className="col-sm-6">
+                <div style={{ marginTop: "1rem", marginBottom: "1rem", textAlign:'right', width: '25%', margin: '0 auto'}}>
+                    <div style={{textAlign: 'center'}}>
                         <strong>
                             <Label for={name}>
                                 {labelText}
                             </Label>
+                            <span style={{ color: 'red' }}> {'*'} </span>
                         </strong>
                     </div>
-                    <div className="col-md-4">
+                    <div>
                         <InputGroup>
                             <InputGroupAddon addonType="prepend">$</InputGroupAddon>
                             <Input type="number" className="form-control" id={name}

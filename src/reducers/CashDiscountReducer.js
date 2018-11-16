@@ -12,12 +12,20 @@ const INITIAL_STATE = () => ({
         modalFees: ''
     },
     overview: false,
+    volume: '',
+    businessName: '',
+    currentProvider: '',
+    avgTicket: '',
+    transactions: '',
+    serviceFeePercent: '',
     additional: new Set()
 });
 
 export default (state = INITIAL_STATE(), action) => {
     console.log(state);
     switch(action.type) {
+        case 'BUSINESS_INFO':
+            return { ...state, [action.name]: action.val };
         case 'UPDATE_CD':
             const tmp = { ...state[action.part], [action.name]: action.val };
             return Object.assign({}, state, {[action.part]: tmp});
