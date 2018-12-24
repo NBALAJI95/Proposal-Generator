@@ -1,0 +1,52 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-header {
+    background-color: #222;
+    height: 180px;
+    padding: 20px;
+    color: white;
+}
+
+.App-title {
+    font-size: 2rem;
+}
+
+.App-intro {
+    font-size: large;
+}
+
+.Form-Container {
+    width: 85%;
+    margin: 0 auto;
+    background: rgba(233, 240, 252, .4);
+    padding: 2rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: 22% 19% 15% 10% 10% 17%;
+  }
+  
+  .grid-container2 {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: 23% 18% 14% 14% 23%;
+  }
+  
+  .grid-container > div, .grid-container2 > div {
+    text-align: center;
+    font-size: 0.8rem;
+  }
