@@ -102,7 +102,7 @@ class CashDiscount extends Component {
                         giving a full discount on the { `${serviceFee}` }% service fee.
                     </p>
                     <p>
-                        Your estimated Average Service Fee is $ {`${avgServiceFee}`}.
+                        Your estimated Average Service Fee is $ {`${avgServiceFee}`}
                     </p>
                     <center>
                         <small style={{fontSize: '0.8rem', lineHeight: '0.5rem'}}>
@@ -118,8 +118,6 @@ class CashDiscount extends Component {
 
     render() {
         const { textStyle, numberTextStyle, whiteBox } = styles;
-
-        console.log('CDDDDDDDD', this.props);
 
         const { state } = this.props.location;
 
@@ -139,7 +137,7 @@ class CashDiscount extends Component {
                         <div>
                             <div className="row" style={{textAlign: 'right'}}>
                                 <div className="col-6" style={{color: 'black'}}>
-                                    <h3> Standard Program </h3>
+                                    <h3> Current Provider </h3>
                                     <span style={textStyle}>Monthly Credit Volume</span>
                                     <span style={numberTextStyle}>{currency(state.volume) || '$ 0.00'}</span>
 
@@ -163,7 +161,7 @@ class CashDiscount extends Component {
                                     </div>
                                 </div>
                                 <div className="col-6" style={{textAlign: 'left', color: 'rgb(83,141,213)'}}>
-                                    <h3> Cash Discount Program </h3>
+                                    <h3> Titanium Cash Discount </h3>
                                     <span style={textStyle}>Monthly Credit Volume</span>
                                     <span style={numberTextStyle}>{currency(state.volume) || '$ 0.00'}</span>
 
@@ -198,24 +196,22 @@ class CashDiscount extends Component {
                             <span style={textStyle}>
                                 Annual Savings*
                             </span>
-                            <span style={{...numberTextStyle, textDecoration: 'underline', color: 'green'}}>
+                            <span style={{...numberTextStyle, fontSize: '1.35rem', textDecoration: 'underline', color: 'green'}}>
                                 {currency(calcTotal(state.partA.Fees, state.partA.additionalFees, true, true) -
                                     calcTotal(state.partB.Fees, state.partB.additionalFees, true, true))}
                             </span>
                             <span style={textStyle}>
                                 Three Year Savings*
                             </span>
-                            <span style={{...numberTextStyle, textDecoration: 'underline', color: 'green'}}>
+                            <span style={{...numberTextStyle, fontSize: '1.35rem', textDecoration: 'underline', color: 'green'}}>
                                 {currency((calcTotal(state.partA.Fees, state.partA.additionalFees, true, true) -
                                     calcTotal(state.partB.Fees, state.partB.additionalFees, true, true)) * 3)}
                             </span>
                             <p style={{marginBottom: 0}}> *Annual savings & Equipment cost may vary </p>
                         </div>
 
-                        {console.log('$#@#$', state.avgTicket, state.serviceFeePercent)}
-
                         {this.renderOverview(state.overview, state.serviceFeePercent,
-                            (parseFloat(state.avgTicket) * parseFloat(state.serviceFeePercent) / 100) || '')}
+                            (parseFloat(state.avgTicket) * parseFloat(state.serviceFeePercent) / 100).toFixed(2) || '')}
                         <br/>
                     </div>
                 </div>
